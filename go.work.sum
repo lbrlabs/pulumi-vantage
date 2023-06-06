@@ -147,8 +147,8 @@ github.com/hexops/gotextdiff v1.0.3/go.mod h1:pSWU5MAI3yDq+fZBTazCSJysOMbxWL1BSo
 github.com/hexops/valast v1.4.0/go.mod h1:uVjKZ0smVuYlgCSPz9NRi5A04sl7lp6GtFWsROKDgEs=
 github.com/hinshun/vt10x v0.0.0-20220119200601-820417d04eec/go.mod h1:Q48J4R4DvxnHolD5P8pOtXigYlRuPLGl6moFx3ulM68=
 github.com/inconshreveable/mousetrap v1.0.1/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
-github.com/jaxxstorm/terraform-provider-vantage v0.0.0-20230606190952-63fbf35e8d3a h1:rFtJCocTT7aH5dKhYWQp96kh6KZlBLD2SwFxa/IFaLc=
-github.com/jaxxstorm/terraform-provider-vantage v0.0.0-20230606190952-63fbf35e8d3a/go.mod h1:CBKYO4j6qCe3Lg3+Gk6ea15xz+tcMDya/RU2El3Lmm8=
+github.com/jaxxstorm/terraform-provider-vantage v0.0.0-20230606191625-491826af7cee h1:QPOn8VCTJjDa3iNxdd2MIoryzNzAx4u0dFtKDKzUa7c=
+github.com/jaxxstorm/terraform-provider-vantage v0.0.0-20230606191625-491826af7cee/go.mod h1:CBKYO4j6qCe3Lg3+Gk6ea15xz+tcMDya/RU2El3Lmm8=
 github.com/jung-kurt/gofpdf v1.0.3-0.20190309125859-24315acbbda5/go.mod h1:7Id9E/uU8ce6rXgefFLlgrJj/GYY22cpxn+r32jIOes=
 github.com/kr/pretty v0.3.1/go.mod h1:hoEshYVHaxMs3cyo3Yncou5ZscifuDolrwPKZanG3xk=
 github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0/go.mod h1:zJYVVT2jmtg6P3p1VtQj7WsuWi/y4VnjVBn7F8KPB3I=

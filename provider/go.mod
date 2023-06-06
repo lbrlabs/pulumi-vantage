@@ -234,6 +234,6 @@ require (
 
 replace (
 	github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20230327102345-3fa930f86570
-	github.com/vantage-sh/terraform-provider-vantage => github.com/jaxxstorm/terraform-provider-vantage v0.0.0-20230606190952-63fbf35e8d3a
+	github.com/vantage-sh/terraform-provider-vantage => github.com/jaxxstorm/terraform-provider-vantage v0.0.0-20230606202658-9b6ed46c7786
 	github.com/vantage-sh/terraform-provider-vantage/shim => ./shim
 )
