@@ -1,0 +1,175 @@
+{
+    "name": "vantage",
+    "displayName": "Vantage",
+    "description": "A Pulumi package to create resource in vantage.sh.",
+    "keywords": [
+        "pulumi",
+        "vantage"
+    ],
+    "homepage": "https://pulumi.io",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`vantage` Terraform Provider](https://github.com/vantage-sh/terraform-provider-vantage).",
+    "repository": "https://github.com/lbrlabs/pulumi-vantage",
+    "pluginDownloadURL": "github://api.github.com/lbrlabs",
+    "publisher": "lbrlabs",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "compatibility": "tfbridge20",
+            "namespaces": {
+                "vantage": "Vantage"
+            },
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "rootNamespace": "Lbrlabs.PulumiPackage"
+        },
+        "go": {
+            "generateExtraInputTypes": true,
+            "generateResourceContainerTypes": true,
+            "importBasePath": "github.com/lbrlabs/pulumi-vantage/sdk/go/vantage"
+        },
+        "nodejs": {
+            "compatibility": "tfbridge20",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/node": "^10.0.0"
+            },
+            "disableUnionOutputTypes": true,
+            "packageDescription": "A Pulumi package to create resource in vantage.sh.",
+            "packageName": "@lbrlabs/pulumi-vantage",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/vantage-sh/terraform-provider-vantage)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-vantage` repo](https://github.com/lbrlabs/pulumi-vantage/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-vantage` repo](https://github.com/vantage-sh/terraform-provider-vantage/issues).",
+            "typescriptVersion": ""
+        },
+        "python": {
+            "compatibility": "tfbridge20",
+            "packageName": "lbrlabs_pulumi_vantage",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/vantage-sh/terraform-provider-vantage)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-vantage` repo](https://github.com/lbrlabs/pulumi-vantage/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-vantage` repo](https://github.com/vantage-sh/terraform-provider-vantage/issues).",
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            }
+        }
+    },
+    "config": {
+        "variables": {
+            "apiToken": {
+                "type": "string",
+                "secret": true
+            },
+            "host": {
+                "type": "string"
+            }
+        }
+    },
+    "provider": {
+        "description": "The provider type for the vantage package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "apiToken": {
+                "type": "string",
+                "secret": true
+            },
+            "host": {
+                "type": "string"
+            }
+        },
+        "inputProperties": {
+            "apiToken": {
+                "type": "string",
+                "secret": true
+            },
+            "host": {
+                "type": "string"
+            }
+        }
+    },
+    "resources": {
+        "vantage:index/awsProvider:AwsProvider": {
+            "description": "Manages an AWS Account Integration.\n",
+            "properties": {
+                "bucketArn": {
+                    "type": "string",
+                    "description": "Bucket ARN for where CUR data is being stored.\n"
+                },
+                "crossAccountArn": {
+                    "type": "string",
+                    "description": "ARN to use for cross account access.\n"
+                }
+            },
+            "required": [
+                "crossAccountArn"
+            ],
+            "inputProperties": {
+                "bucketArn": {
+                    "type": "string",
+                    "description": "Bucket ARN for where CUR data is being stored.\n"
+                },
+                "crossAccountArn": {
+                    "type": "string",
+                    "description": "ARN to use for cross account access.\n"
+                }
+            },
+            "requiredInputs": [
+                "crossAccountArn"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AwsProvider resources.\n",
+                "properties": {
+                    "bucketArn": {
+                        "type": "string",
+                        "description": "Bucket ARN for where CUR data is being stored.\n"
+                    },
+                    "crossAccountArn": {
+                        "type": "string",
+                        "description": "ARN to use for cross account access.\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "vantage:index/getAwsProviderInfo:getAwsProviderInfo": {
+            "outputs": {
+                "description": "A collection of values returned by getAwsProviderInfo.\n",
+                "properties": {
+                    "additionalResourcesPolicy": {
+                        "type": "string"
+                    },
+                    "autopilotPolicy": {
+                        "type": "string"
+                    },
+                    "cloudwatchMetricsPolicy": {
+                        "type": "string"
+                    },
+                    "externalId": {
+                        "type": "string"
+                    },
+                    "iamRoleArn": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "rootPolicy": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "additionalResourcesPolicy",
+                    "autopilotPolicy",
+                    "cloudwatchMetricsPolicy",
+                    "externalId",
+                    "iamRoleArn",
+                    "rootPolicy",
+                    "id"
+                ]
+            }
+        }
+    }
+}

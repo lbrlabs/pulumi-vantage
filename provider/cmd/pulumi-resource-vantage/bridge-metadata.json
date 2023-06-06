@@ -1,0 +1,37 @@
+{
+    "functions": {
+        "vantage:index/getAwsProvider:getAwsProvider": "vantage_aws_provider_info"
+    },
+    "renamedProperties": {},
+    "renames": {
+        "resources": {
+            "vantage:index/awsProvider:AwsProvider": "vantage_aws_provider"
+        },
+        "functions": {
+            "vantage:index/getAwsProviderInfo:getAwsProviderInfo": "vantage_aws_provider_info"
+        },
+        "renamedProperties": {
+            "vantage:index/awsProvider:AwsProvider": {
+                "bucketArn": "bucket_arn",
+                "crossAccountArn": "cross_account_arn"
+            },
+            "vantage:index/getAwsProviderInfo:getAwsProviderInfo": {
+                "additionalResourcesPolicy": "additional_resources_policy",
+                "autopilotPolicy": "autopilot_policy",
+                "cloudwatchMetricsPolicy": "cloudwatch_metrics_policy",
+                "externalId": "external_id",
+                "iamRoleArn": "iam_role_arn",
+                "rootPolicy": "root_policy"
+            },
+            "vantage:index:Provider": {
+                "apiToken": "api_token"
+            }
+        },
+        "renamedConfigProperties": {
+            "apiToken": "api_token"
+        }
+    },
+    "resources": {
+        "vantage:index/AwsProvider:AwsProvider": "vantage_aws_provider"
+    }
+}
