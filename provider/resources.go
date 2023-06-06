@@ -74,6 +74,7 @@ func Provider() tfpfbridge.ProviderInfo {
 		License:           "Apache-2.0",
 		Homepage:          "https://pulumi.io",
 		Repository:        "https://github.com/lbrlabs/pulumi-vantage",
+		LogoURL:           "https://raw.githubusercontent.com/lbrlabs/pulumi-vantage/main/assets/vantage.png", // nolint[:lll]
 		Version:           version.Version,
 		GitHubOrg:         "vantage-sh",
 		MetadataInfo:      tfbridge.NewProviderMetadata(bridgeMetadata),
