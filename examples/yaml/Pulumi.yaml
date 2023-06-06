@@ -1,2 +1,178 @@
+name: tf
+runtime: yaml
 config:
-  aws:region: us-east-1
+  vantageSnsTopicArn:
+    type: string
+    default: arn:aws:sns:us-east-1:630399649041:cost-and-usage-report-uploaded
+  curReportName:
+    type: string
+    default: VantageReport
+  compatibilityPrivateBucketAcl:
+    type: boolean
+    default: false
+  enableAutopilot:
+    type: boolean
+    default: true
+resources:
+  vantageCrossAccountConnectionWithBucket:
+    type: aws:iam:Role
+    properties:
+      inlinePolicies:
+        - name: VantageCostandUsageReportRetrieval
+          policy: ${vantageCurRetrieval.json}
+        - name: root
+          policy: ${default.rootPolicy}
+        - name: VantageCloudWatchMetricsReadOnly
+          policy: ${default.cloudwatchMetricsPolicy}
+        - name: VantageAdditionalResourceReadOnly
+          policy: ${default.additionalResourcesPolicy}
+      name: vantage_cross_account_connection
+      assumeRolePolicy: ${vantageAssumeRole.json}
+  vantageCrossAccountConnectionBucketPolicy:
+    type: aws:iam:RolePolicyAttachment
+    properties:
+      role: ${vantageCrossAccountConnectionWithBucket.name}
+      policyArn: arn:aws:iam::aws:policy/job-function/ViewOnlyAccess
+  vantageCostAndUsageReports:
+    type: aws:cur:ReportDefinition
+    properties:
+      reportName: VantageUsageReports
+      timeUnit: DAILY
+      format: textORcsv
+      compression: GZIP
+      additionalSchemaElements:
+        - RESOURCES
+      s3Bucket: ${vantageCostAndUsageReportsBucket.id}
+      s3Region: us-east-1
+      s3Prefix: daily-v1
+      reportVersioning: OVERWRITE_REPORT
+      refreshClosedReports: true
+    options:
+      dependsOn:
+       - ${vantageCostAndUsageReportsBucket}
+       - ${vantageCostAndUsageReportsBucketOwnershipControls}
+       - ${vantageCostAndUsageReportsBucketAcl}
+       - ${vantageCostAndUsageReportsLifecycleConfiguration}
+       - ${vantageCostAndUsageReportPublicAccessBlock}
+       - ${vantageCostAndUsageReportsBucketPolicy}
+  vantageCostAndUsageReportsBucket:
+    type: aws:s3:BucketV2
+    properties:
+      forceDestroy: true
+  vantageCostAndUsageReportsBucketOwnershipControls:
+    type: aws:s3:BucketOwnershipControls
+    properties:
+      bucket: ${vantageCostAndUsageReportsBucket.id}
+      rule:
+        objectOwnership: ObjectWriter
+  vantageCostAndUsageReportsBucketAcl:
+    type: aws:s3:BucketAclV2
+    properties:
+      bucket: ${vantageCostAndUsageReportsBucket.id}
+      acl: private
+    options:
+      dependsOn: [ "${vantageCostAndUsageReportsBucketOwnershipControls}" ]
+  vantageCostAndUsageReportsLifecycleConfiguration:
+    type: aws:s3:BucketLifecycleConfigurationV2
+    properties:
+      bucket: ${vantageCostAndUsageReportsBucket.id}
+      rules:
+        - id: remove-old-reports
+          expiration:
+            days: 200
+          status: Enabled
+  vantageCostAndUsageReportPublicAccessBlock:
+    type: aws:s3:BucketPublicAccessBlock
+    properties:
+      bucket: ${vantageCostAndUsageReportsBucket.id}
+      blockPublicAcls: true
+      blockPublicPolicy: true
+      restrictPublicBuckets: true
+      ignorePublicAcls: true
+  vantageCostAndUsageReportsBucketPolicy:
+    type: aws:s3:BucketPolicy
+    properties:
+      bucket: ${vantageCostAndUsageReportsBucket.id}
+      policy: ${vantageCurAccess.json}
+  vantageCostAndUsageReportsBucketNotification:
+    type: aws:s3:BucketNotification
+    properties:
+      bucket: ${vantageCostAndUsageReportsBucket.id}
+      topics:
+        - topicArn: ${vantageSnsTopicArn}
+          events:
+            - s3:ObjectCreated:*
+          filterSuffix: .csv.gz
+  VantageAwsProvider:
+    type: vantage:AwsProvider
+    properties:
+      crossAccountArn: ${vantageCrossAccountConnectionWithBucket.arn}
+      bucketArn: ${vantageCostAndUsageReportsBucket.arn}
+variables:
+  default:
+    fn::invoke:
+      function: vantage:index:getAwsProviderInfo
+      arguments: {}
+  vantageAssumeRole:
+    fn::invoke:
+      function: aws:iam:getPolicyDocument
+      arguments:
+        statements:
+          - effect: Allow
+            actions:
+              - sts:AssumeRole
+            principals:
+              - type: AWS
+                identifiers:
+                  - ${default.iamRoleArn}
+            conditions:
+              - variable: sts:ExternalId
+                test: StringEquals
+                values:
+                  - ${default.externalId}
+  vantageCurRetrieval:
+    fn::invoke:
+      function: aws:iam:getPolicyDocument
+      arguments:
+        statements:
+          - effect: Allow
+            actions:
+              - s3:GetObject
+              - s3:GetObjectAcl
+            resources:
+              - ${vantageCostAndUsageReportsBucket.arn}/*
+  vantageCurAccess:
+    fn::invoke:
+      function: aws:iam:getPolicyDocument
+      arguments:
+        statements:
+          - effect: Allow
+            actions:
+              - s3:GetBucketAcl
+              - s3:GetBucketPolicy
+            principals:
+              - type: Service
+                identifiers:
+                  - billingreports.amazonaws.com
+            resources:
+              - ${vantageCostAndUsageReportsBucket.arn}
+          - effect: Allow
+            actions:
+              - s3:PutObject
+            principals:
+              - type: Service
+                identifiers:
+                  - billingreports.amazonaws.com
+            resources:
+              - ${vantageCostAndUsageReportsBucket.arn}/*
+          - effect: Allow
+            actions:
+              - s3:GetObject
+              - s3:GetObjectAcl
+            principals:
+              - type: AWS
+                identifiers:
+                  - ${vantageCrossAccountConnectionWithBucket.arn}
+            resources:
+              - ${vantageCostAndUsageReportsBucket.arn}/*
+
