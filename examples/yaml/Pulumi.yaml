@@ -1,0 +1,11 @@
+name: vantage_example_yaml
+runtime: yaml
+description: Create a vantage connection
+resources: {}
+variables:
+  default_vantage_provider:
+    fn::invoke:
+      function: vantage:index:getAwsProvider
+      return: iamRoleArn
+outputs:
+  vantage_iam_role: ${default_vantage_provider}

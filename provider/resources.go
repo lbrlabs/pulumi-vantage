@@ -12,142 +12,116 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package xyz
+package tls
 
 import (
+	_ "embed"
 	"fmt"
 	"path/filepath"
+	"unicode"
 
+	"github.com/lbrlabs/pulumi-vantage/provider/pkg/version"
+	tfpfbridge "github.com/pulumi/pulumi-terraform-bridge/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
-	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
-	"github.com/pulumi/pulumi-xyz/provider/pkg/version"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
-	"github.com/terraform-providers/terraform-provider-xyz/xyz"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/tokens"
+	"github.com/vantage-sh/terraform-provider-vantage/shim"
 )
 
-// all of the token components used below.
+// all of the tls token components used below.
 const (
-	// This variable controls the default name of the package in the package
-	// registries for nodejs and python:
-	mainPkg = "xyz"
-	// modules:
-	mainMod = "index" // the xyz module
+	vantagePkg = "vantage"
+	vantageMod = "index"
 )
 
-// preConfigureCallback is called before the providerConfigure function of the underlying provider.
-// It should validate that the provider can be configured, and provide actionable errors in the case
-// it cannot be. Configuration variables can be read from `vars` using the `stringValue` function -
-// for example `stringValue(vars, "accessKey")`.
-func preConfigureCallback(vars resource.PropertyMap, c shim.ResourceConfig) error {
-	return nil
+// vantageMember manufactures a type token for the TLS package and the given module and type.
+func vantageMember(mod string, mem string) tokens.ModuleMember {
+	return tokens.ModuleMember(vantagePkg + ":" + mod + ":" + mem)
 }
 
-// Provider returns additional overlaid schema and metadata associated with the provider..
-func Provider() tfbridge.ProviderInfo {
-	// Instantiate the Terraform provider
-	p := shimv2.NewProvider(xyz.Provider())
+// vantageType manufactures a type token for the TLS package and the given module and type.
+func vantageType(mod string, typ string) tokens.Type {
+	return tokens.Type(vantageMember(mod, typ))
+}
 
-	// Create a Pulumi provider mapping
-	prov := tfbridge.ProviderInfo{
-		P:    p,
-		Name: "xyz",
-		// DisplayName is a way to be able to change the casing of the provider
-		// name when being displayed on the Pulumi registry
-		DisplayName: "",
-		// The default publisher for all packages is Pulumi.
-		// Change this to your personal name (or a company name) that you
-		// would like to be shown in the Pulumi Registry if this package is published
-		// there.
-		Publisher: "Pulumi",
-		// LogoURL is optional but useful to help identify your package in the Pulumi Registry
-		// if this package is published there.
-		//
-		// You may host a logo on a domain you control or add an SVG logo for your package
-		// in your repository and use the raw content URL for that file as your logo URL.
-		LogoURL: "",
-		// PluginDownloadURL is an optional URL used to download the Provider
-		// for use in Pulumi programs
-		// e.g https://github.com/org/pulumi-provider-name/releases/
-		PluginDownloadURL: "",
-		Description:       "A Pulumi package for creating and managing xyz cloud resources.",
-		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
-		// For all available categories, see `Keywords` in
-		// https://www.pulumi.com/docs/guides/pulumi-packages/schema/#package.
-		Keywords:   []string{"pulumi", "xyz", "category/cloud"},
-		License:    "Apache-2.0",
-		Homepage:   "https://www.pulumi.com",
-		Repository: "https://github.com/pulumi/pulumi-xyz",
-		// The GitHub Org for the provider - defaults to `terraform-providers`. Note that this
-		// should match the TF provider module's require directive, not any replace directives.
-		GitHubOrg: "",
-		Config:    map[string]*tfbridge.SchemaInfo{
-			// Add any required configuration here, or remove the example below if
-			// no additional points are required.
-			// "region": {
-			// 	Type: tfbridge.MakeType("region", "Region"),
-			// 	Default: &tfbridge.DefaultInfo{
-			// 		EnvVars: []string{"AWS_REGION", "AWS_DEFAULT_REGION"},
-			// 	},
-			// },
-		},
-		PreConfigureCallback: preConfigureCallback,
-		Resources:            map[string]*tfbridge.ResourceInfo{
-			// Map each resource in the Terraform provider to a Pulumi type. Two examples
-			// are below - the single line form is the common case. The multi-line form is
-			// needed only if you wish to override types or other default options.
-			//
-			// "aws_iam_role": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "IamRole")}
-			//
-			// "aws_acm_certificate": {
-			// 	Tok: tfbridge.MakeResource(mainPkg, mainMod, "Certificate"),
-			// 	Fields: map[string]*tfbridge.SchemaInfo{
-			// 		"tags": {Type: tfbridge.MakeType(mainPkg, "Tags")},
-			// 	},
-			// },
+// vantageDataSource manufactures a standard resource token given a module and resource name.
+// It automatically uses the TLS package and names the file by simply lower casing the data
+// source's first character.
+func vantageDataSource(mod string, res string) tokens.ModuleMember {
+	fn := string(unicode.ToLower(rune(res[0]))) + res[1:]
+	return vantageMember(mod+"/"+fn, res)
+}
+
+// vantageResource manufactures a standard resource token given a module and resource name.
+// It automatically uses the TLS package and names the file by simply lower casing the resource's
+// first character.
+func vantageResource(mod string, res string) tokens.Type {
+	fn := string(unicode.ToLower(rune(res[0]))) + res[1:]
+	return vantageType(mod+"/"+fn, res)
+}
+
+//go:embed cmd/pulumi-resource-vantage/bridge-metadata.json
+var bridgeMetadata []byte
+
+// Provider returns additional overlaid schema and metadata associated with the tls package.
+func Provider() tfpfbridge.ProviderInfo {
+	info := tfbridge.ProviderInfo{
+		Name:              "vantage",
+		DisplayName:       "Vantage",
+		Publisher:         "lbrlabs",
+		Description:       "A Pulumi package to create resource in vantage.sh.",
+		PluginDownloadURL: "github://api.github.com/lbrlabs",
+		Keywords:          []string{"pulumi", "vantage"},
+		License:           "Apache-2.0",
+		Homepage:          "https://pulumi.io",
+		Repository:        "https://github.com/lbrlabs/pulumi-vantage",
+		Version:           version.Version,
+		GitHubOrg:         "vantage-sh",
+		MetadataInfo:      tfbridge.NewProviderMetadata(bridgeMetadata),
+		Resources: map[string]*tfbridge.ResourceInfo{
+			"vantage_aws_provider": {
+				Tok: vantageResource(vantageMod, "AwsProvider"),
+			},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
-			// Map each resource in the Terraform provider to a Pulumi function. An example
-			// is below.
-			// "aws_ami": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getAmi")},
+			"vantage_aws_provider_info": {Tok: vantageDataSource(vantageMod, "getAwsProviderInfo")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
-			// List any npm dependencies and their versions
+			PackageName: "@lbrlabs/pulumi-vantage",
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
 			},
 			DevDependencies: map[string]string{
 				"@types/node": "^10.0.0", // so we can access strongly typed node definitions.
-				"@types/mime": "^2.0.0",
 			},
-			// See the documentation for tfbridge.OverlayInfo for how to lay out this
-			// section, or refer to the AWS provider. Delete this section if there are
-			// no overlay files.
-			//Overlay: &tfbridge.OverlayInfo{},
 		},
 		Python: &tfbridge.PythonInfo{
-			// List any Python dependencies and their version ranges
+			PackageName: "lbrlabs_pulumi_vantage",
 			Requires: map[string]string{
 				"pulumi": ">=3.0.0,<4.0.0",
 			},
 		},
 		Golang: &tfbridge.GolangInfo{
 			ImportBasePath: filepath.Join(
-				fmt.Sprintf("github.com/pulumi/pulumi-%[1]s/sdk/", mainPkg),
+				fmt.Sprintf("github.com/lbrlabs/pulumi-%[1]s/sdk/", vantagePkg),
 				tfbridge.GetModuleMajorVersion(version.Version),
 				"go",
-				mainPkg,
+				vantagePkg,
 			),
 			GenerateResourceContainerTypes: true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
+			RootNamespace: "Lbrlabs.PulumiPackage",
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
+			},
+			Namespaces: map[string]string{
+				"vantage": "Vantage",
 			},
 		},
 	}
 
-	prov.SetAutonaming(255, "-")
-
-	return prov
+	return tfpfbridge.ProviderInfo{
+		ProviderInfo: info,
+		NewProvider:  shim.NewProvider,
+	}
 }
