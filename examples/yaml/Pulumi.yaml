@@ -1,4 +1,4 @@
-name: tf
+name: vantage-yaml
 runtime: yaml
 config:
   vantageSnsTopicArn:
@@ -14,7 +14,7 @@ config:
     type: boolean
     default: true
 resources:
-  vantageCrossAccountConnectionWithBucket:
+  vantageCrossAccountConnectionIamRole:
     type: aws:iam:Role
     properties:
       inlinePolicies:
@@ -28,11 +28,13 @@ resources:
           policy: ${default.additionalResourcesPolicy}
       name: vantage_cross_account_connection
       assumeRolePolicy: ${vantageAssumeRole.json}
-  vantageCrossAccountConnectionBucketPolicy:
+  vantageCrossAccountConnectionPolicy:
     type: aws:iam:RolePolicyAttachment
     properties:
-      role: ${vantageCrossAccountConnectionWithBucket.name}
+      role: ${vantageCrossAccountConnectionIamRole.name}
       policyArn: arn:aws:iam::aws:policy/job-function/ViewOnlyAccess
+    options:
+      parent: "${vantageCrossAccountConnectionIamRole}"
   vantageCostAndUsageReports:
     type: aws:cur:ReportDefinition
     properties:
@@ -65,6 +67,8 @@ resources:
       bucket: ${vantageCostAndUsageReportsBucket.id}
       rule:
         objectOwnership: ObjectWriter
+    options:
+      parent: "${vantageCostAndUsageReportsBucket}"
   vantageCostAndUsageReportsBucketAcl:
     type: aws:s3:BucketAclV2
     properties:
@@ -72,6 +76,7 @@ resources:
       acl: private
     options:
       dependsOn: [ "${vantageCostAndUsageReportsBucketOwnershipControls}" ]
+      parent: "${vantageCostAndUsageReportsBucket}"
   vantageCostAndUsageReportsLifecycleConfiguration:
     type: aws:s3:BucketLifecycleConfigurationV2
     properties:
@@ -81,6 +86,8 @@ resources:
           expiration:
             days: 200
           status: Enabled
+    options:
+      parent: "${vantageCostAndUsageReportsBucket}"
   vantageCostAndUsageReportPublicAccessBlock:
     type: aws:s3:BucketPublicAccessBlock
     properties:
@@ -89,11 +96,15 @@ resources:
       blockPublicPolicy: true
       restrictPublicBuckets: true
       ignorePublicAcls: true
+    options:
+      parent: "${vantageCostAndUsageReportsBucket}"
   vantageCostAndUsageReportsBucketPolicy:
     type: aws:s3:BucketPolicy
     properties:
       bucket: ${vantageCostAndUsageReportsBucket.id}
       policy: ${vantageCurAccess.json}
+    options:
+      parent: "${vantageCostAndUsageReportsBucket}"
   vantageCostAndUsageReportsBucketNotification:
     type: aws:s3:BucketNotification
     properties:
@@ -103,10 +114,12 @@ resources:
           events:
             - s3:ObjectCreated:*
           filterSuffix: .csv.gz
+    options:
+      parent: "${vantageCostAndUsageReportsBucket}"
   VantageAwsProvider:
     type: vantage:AwsProvider
     properties:
-      crossAccountArn: ${vantageCrossAccountConnectionWithBucket.arn}
+      crossAccountArn: ${vantageCrossAccountConnectionIamRole.arn}
       bucketArn: ${vantageCostAndUsageReportsBucket.arn}
 variables:
   default:
@@ -172,7 +185,7 @@ variables:
             principals:
               - type: AWS
                 identifiers:
-                  - ${vantageCrossAccountConnectionWithBucket.arn}
+                  - ${vantageCrossAccountConnectionIamRole.arn}
             resources:
               - ${vantageCostAndUsageReportsBucket.arn}/*
 
