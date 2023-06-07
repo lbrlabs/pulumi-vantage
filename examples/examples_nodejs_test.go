@@ -13,7 +13,7 @@ import (
 func TestBasic(t *testing.T) {
 	test := getJSBaseOptions(t).
 		With(integration.ProgramTestOptions{
-			Dir: path.Join(getCwd(t), "ts"),
+			Dir: path.Join(getCwd(t), "typescript"),
 		})
 
 	integration.ProgramTest(t, &test)
