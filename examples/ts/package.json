@@ -1,0 +1,12 @@
+{
+		"name": "vantage-yaml",
+		"devDependencies": {
+			"@types/node": "^14"
+		},
+		"dependencies": {
+			"typescript": "^4.0.0",
+			"@pulumi/pulumi": "^3.0.0",
+			"@pulumi/aws": "5.41.0",
+			"@lbrlabs/pulumi-vantage": "0.0.1-alpha.1686095599+d29d7069"
+		}
+}

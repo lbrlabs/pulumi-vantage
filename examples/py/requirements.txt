@@ -1,0 +1,3 @@
+pulumi>=3.0.0,<4.0.0
+pulumi-aws==5.41.0
+lbrlabs_pulumi_vantage==0.0.1-alpha.1686095599+d29d7069

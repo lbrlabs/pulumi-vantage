@@ -1,0 +1,15 @@
+name: vantage-yaml
+runtime: nodejs
+config:
+  compatibilityPrivateBucketAcl:
+    type: boolean
+    default: false
+  curReportName:
+    type: string
+    default: VantageReport
+  enableAutopilot:
+    type: boolean
+    default: true
+  vantageSnsTopicArn:
+    type: string
+    default: arn:aws:sns:us-east-1:630399649041:cost-and-usage-report-uploaded
