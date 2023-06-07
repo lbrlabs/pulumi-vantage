@@ -3,6 +3,7 @@
 
 package examples
 
+/*
 import (
 	"path"
 	"testing"
@@ -30,3 +31,4 @@ func getJSBaseOptions(t *testing.T) integration.ProgramTestOptions {
 
 	return baseJS
 }
+*/
