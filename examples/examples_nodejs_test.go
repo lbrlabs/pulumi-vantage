@@ -10,10 +10,10 @@ import (
 	"github.com/pulumi/pulumi/pkg/v3/testing/integration"
 )
 
-func TestAccServiceAccount(t *testing.T) {
+func TestBasic(t *testing.T) {
 	test := getJSBaseOptions(t).
 		With(integration.ProgramTestOptions{
-			Dir: path.Join(getCwd(t), "typescript"),
+			Dir: path.Join(getCwd(t), "ts"),
 		})
 
 	integration.ProgramTest(t, &test)
