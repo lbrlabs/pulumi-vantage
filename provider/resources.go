@@ -82,9 +82,22 @@ func Provider() tfpfbridge.ProviderInfo {
 			"vantage_aws_provider": {
 				Tok: vantageResource(vantageMod, "AwsProvider"),
 			},
+			"vantage_cost_report": {
+				Tok: vantageResource(vantageMod, "CostReport"),
+			},
+			"vantage_dashboard": {
+				Tok: vantageResource(vantageMod, "Dashboard"),
+			},
+			"vantage_folder": {
+				Tok: vantageResource(vantageMod, "Folder"),
+			},
+			"vantage_saved_filter": {
+				Tok: vantageResource(vantageMod, "SavedFilter"),
+			},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			"vantage_aws_provider_info": {Tok: vantageDataSource(vantageMod, "getAwsProviderInfo")},
+			"vantage_saved_filters": {Tok: vantageDataSource(vantageMod, "SavedFilters")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: "@lbrlabs/pulumi-vantage",

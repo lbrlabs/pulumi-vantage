@@ -10,6 +10,7 @@ import com.pulumi.deployment.InvokeOptions;
 import com.pulumi.resources.InvokeArgs;
 import com.pulumi.vantage.Utilities;
 import com.pulumi.vantage.outputs.GetAwsProviderInfoResult;
+import com.pulumi.vantage.outputs.SavedFiltersResult;
 import java.util.concurrent.CompletableFuture;
 
 public final class VantageFunctions {
@@ -30,5 +31,23 @@ public final class VantageFunctions {
     }
     public static CompletableFuture<GetAwsProviderInfoResult> getAwsProviderInfoPlain(InvokeArgs args, InvokeOptions options) {
         return Deployment.getInstance().invokeAsync("vantage:index/getAwsProviderInfo:getAwsProviderInfo", TypeShape.of(GetAwsProviderInfoResult.class), args, Utilities.withVersion(options));
+    }
+    public static Output<SavedFiltersResult> savedFilters() {
+        return savedFilters(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<SavedFiltersResult> savedFiltersPlain() {
+        return savedFiltersPlain(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static Output<SavedFiltersResult> savedFilters(InvokeArgs args) {
+        return savedFilters(args, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<SavedFiltersResult> savedFiltersPlain(InvokeArgs args) {
+        return savedFiltersPlain(args, InvokeOptions.Empty);
+    }
+    public static Output<SavedFiltersResult> savedFilters(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vantage:index/savedFilters:SavedFilters", TypeShape.of(SavedFiltersResult.class), args, Utilities.withVersion(options));
+    }
+    public static CompletableFuture<SavedFiltersResult> savedFiltersPlain(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vantage:index/savedFilters:SavedFilters", TypeShape.of(SavedFiltersResult.class), args, Utilities.withVersion(options));
     }
 }

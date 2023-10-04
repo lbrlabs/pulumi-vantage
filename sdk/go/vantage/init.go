@@ -22,6 +22,14 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "vantage:index/awsProvider:AwsProvider":
 		r = &AwsProvider{}
+	case "vantage:index/costReport:CostReport":
+		r = &CostReport{}
+	case "vantage:index/dashboard:Dashboard":
+		r = &Dashboard{}
+	case "vantage:index/folder:Folder":
+		r = &Folder{}
+	case "vantage:index/savedFilter:SavedFilter":
+		r = &SavedFilter{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -53,6 +61,26 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"vantage",
 		"index/awsProvider",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"vantage",
+		"index/costReport",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"vantage",
+		"index/dashboard",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"vantage",
+		"index/folder",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"vantage",
+		"index/savedFilter",
 		&module{version},
 	)
 	pulumi.RegisterResourcePackage(

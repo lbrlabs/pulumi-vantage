@@ -10,6 +10,21 @@ export type AwsProvider = import("./awsProvider").AwsProvider;
 export const AwsProvider: typeof import("./awsProvider").AwsProvider = null as any;
 utilities.lazyLoad(exports, ["AwsProvider"], () => require("./awsProvider"));
 
+export { CostReportArgs, CostReportState } from "./costReport";
+export type CostReport = import("./costReport").CostReport;
+export const CostReport: typeof import("./costReport").CostReport = null as any;
+utilities.lazyLoad(exports, ["CostReport"], () => require("./costReport"));
+
+export { DashboardArgs, DashboardState } from "./dashboard";
+export type Dashboard = import("./dashboard").Dashboard;
+export const Dashboard: typeof import("./dashboard").Dashboard = null as any;
+utilities.lazyLoad(exports, ["Dashboard"], () => require("./dashboard"));
+
+export { FolderArgs, FolderState } from "./folder";
+export type Folder = import("./folder").Folder;
+export const Folder: typeof import("./folder").Folder = null as any;
+utilities.lazyLoad(exports, ["Folder"], () => require("./folder"));
+
 export { GetAwsProviderInfoResult } from "./getAwsProviderInfo";
 export const getAwsProviderInfo: typeof import("./getAwsProviderInfo").getAwsProviderInfo = null as any;
 utilities.lazyLoad(exports, ["getAwsProviderInfo"], () => require("./getAwsProviderInfo"));
@@ -19,12 +34,23 @@ export type Provider = import("./provider").Provider;
 export const Provider: typeof import("./provider").Provider = null as any;
 utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
 
+export { SavedFilterArgs, SavedFilterState } from "./savedFilter";
+export type SavedFilter = import("./savedFilter").SavedFilter;
+export const SavedFilter: typeof import("./savedFilter").SavedFilter = null as any;
+utilities.lazyLoad(exports, ["SavedFilter"], () => require("./savedFilter"));
+
+export { SavedFiltersResult } from "./savedFilters";
+export const savedFilters: typeof import("./savedFilters").savedFilters = null as any;
+utilities.lazyLoad(exports, ["savedFilters"], () => require("./savedFilters"));
+
 
 // Export sub-modules:
 import * as config from "./config";
+import * as types from "./types";
 
 export {
     config,
+    types,
 };
 
 const _module = {
@@ -33,12 +59,24 @@ const _module = {
         switch (type) {
             case "vantage:index/awsProvider:AwsProvider":
                 return new AwsProvider(name, <any>undefined, { urn })
+            case "vantage:index/costReport:CostReport":
+                return new CostReport(name, <any>undefined, { urn })
+            case "vantage:index/dashboard:Dashboard":
+                return new Dashboard(name, <any>undefined, { urn })
+            case "vantage:index/folder:Folder":
+                return new Folder(name, <any>undefined, { urn })
+            case "vantage:index/savedFilter:SavedFilter":
+                return new SavedFilter(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
 pulumi.runtime.registerResourceModule("vantage", "index/awsProvider", _module)
+pulumi.runtime.registerResourceModule("vantage", "index/costReport", _module)
+pulumi.runtime.registerResourceModule("vantage", "index/dashboard", _module)
+pulumi.runtime.registerResourceModule("vantage", "index/folder", _module)
+pulumi.runtime.registerResourceModule("vantage", "index/savedFilter", _module)
 pulumi.runtime.registerResourcePackage("vantage", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

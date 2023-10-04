@@ -16,9 +16,17 @@
         "awsProvider.ts",
         "config/index.ts",
         "config/vars.ts",
+        "costReport.ts",
+        "dashboard.ts",
+        "folder.ts",
         "getAwsProviderInfo.ts",
         "index.ts",
         "provider.ts",
+        "savedFilter.ts",
+        "savedFilters.ts",
+        "types/index.ts",
+        "types/input.ts",
+        "types/output.ts",
         "utilities.ts"
     ]
 }
