@@ -6,8 +6,14 @@ from . import _utilities
 import typing
 # Export this package's modules as members:
 from .aws_provider import *
+from .cost_report import *
+from .dashboard import *
+from .folder import *
 from .get_aws_provider_info import *
 from .provider import *
+from .saved_filter import *
+from .saved_filters import *
+from . import outputs
 
 # Make subpackages available:
 if typing.TYPE_CHECKING:
@@ -25,6 +31,38 @@ _utilities.register(
   "fqn": "lbrlabs_pulumi_vantage",
   "classes": {
    "vantage:index/awsProvider:AwsProvider": "AwsProvider"
+  }
+ },
+ {
+  "pkg": "vantage",
+  "mod": "index/costReport",
+  "fqn": "lbrlabs_pulumi_vantage",
+  "classes": {
+   "vantage:index/costReport:CostReport": "CostReport"
+  }
+ },
+ {
+  "pkg": "vantage",
+  "mod": "index/dashboard",
+  "fqn": "lbrlabs_pulumi_vantage",
+  "classes": {
+   "vantage:index/dashboard:Dashboard": "Dashboard"
+  }
+ },
+ {
+  "pkg": "vantage",
+  "mod": "index/folder",
+  "fqn": "lbrlabs_pulumi_vantage",
+  "classes": {
+   "vantage:index/folder:Folder": "Folder"
+  }
+ },
+ {
+  "pkg": "vantage",
+  "mod": "index/savedFilter",
+  "fqn": "lbrlabs_pulumi_vantage",
+  "classes": {
+   "vantage:index/savedFilter:SavedFilter": "SavedFilter"
   }
  }
 ]

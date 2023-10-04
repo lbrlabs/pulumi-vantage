@@ -66,6 +66,39 @@
             }
         }
     },
+    "types": {
+        "vantage:index/SavedFiltersFilter:SavedFiltersFilter": {
+            "properties": {
+                "costReportTokens": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "workspaceToken": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "costReportTokens",
+                "title",
+                "token",
+                "workspaceToken"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        }
+    },
     "provider": {
         "description": "The provider type for the vantage package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
         "properties": {
@@ -130,6 +163,366 @@
                 },
                 "type": "object"
             }
+        },
+        "vantage:index/costReport:CostReport": {
+            "description": "Manages a CostReport.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as vantage from \"@lbrlabs/pulumi-vantage\";\n\nconst demoReport = new vantage.CostReport(\"demoReport\", {\n    filter: \"costs.provider = 'aws'\",\n    folderToken: \"fldr_3555785cd0409118\",\n    savedFilterTokens: [\n        \"svd_fltr_e844a2ccace05933\",\n        \"svd_fltr_1b4b80a380ef4ba2\",\n    ],\n    title: \"Demo Report\",\n});\n```\n```python\nimport pulumi\nimport lbrlabs_pulumi_vantage as vantage\n\ndemo_report = vantage.CostReport(\"demoReport\",\n    filter=\"costs.provider = 'aws'\",\n    folder_token=\"fldr_3555785cd0409118\",\n    saved_filter_tokens=[\n        \"svd_fltr_e844a2ccace05933\",\n        \"svd_fltr_1b4b80a380ef4ba2\",\n    ],\n    title=\"Demo Report\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Vantage = Lbrlabs.PulumiPackage.Vantage;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var demoReport = new Vantage.CostReport(\"demoReport\", new()\n    {\n        Filter = \"costs.provider = 'aws'\",\n        FolderToken = \"fldr_3555785cd0409118\",\n        SavedFilterTokens = new[]\n        {\n            \"svd_fltr_e844a2ccace05933\",\n            \"svd_fltr_1b4b80a380ef4ba2\",\n        },\n        Title = \"Demo Report\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/lbrlabs/pulumi-vantage/sdk/go/vantage\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := vantage.NewCostReport(ctx, \"demoReport\", \u0026vantage.CostReportArgs{\n\t\t\tFilter:      pulumi.String(\"costs.provider = 'aws'\"),\n\t\t\tFolderToken: pulumi.String(\"fldr_3555785cd0409118\"),\n\t\t\tSavedFilterTokens: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"svd_fltr_e844a2ccace05933\"),\n\t\t\t\tpulumi.String(\"svd_fltr_1b4b80a380ef4ba2\"),\n\t\t\t},\n\t\t\tTitle: pulumi.String(\"Demo Report\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.vantage.CostReport;\nimport com.pulumi.vantage.CostReportArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var demoReport = new CostReport(\"demoReport\", CostReportArgs.builder()        \n            .filter(\"costs.provider = 'aws'\")\n            .folderToken(\"fldr_3555785cd0409118\")\n            .savedFilterTokens(            \n                \"svd_fltr_e844a2ccace05933\",\n                \"svd_fltr_1b4b80a380ef4ba2\")\n            .title(\"Demo Report\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  demoReport:\n    type: vantage:CostReport\n    properties:\n      filter: costs.provider = 'aws'\n      folderToken: fldr_3555785cd0409118\n      savedFilterTokens:\n        - svd_fltr_e844a2ccace05933\n        - svd_fltr_1b4b80a380ef4ba2\n      title: Demo Report\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "filter": {
+                    "type": "string",
+                    "description": "Filter query to apply to the Cost Report\n"
+                },
+                "folderToken": {
+                    "type": "string",
+                    "description": "Token of the folder this report resides in.\n"
+                },
+                "savedFilterTokens": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Saved filter tokens to be applied to the report.\n"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Title of the Cost Report\n"
+                },
+                "token": {
+                    "type": "string",
+                    "description": "Unique cost report identifier\n"
+                },
+                "workspaceToken": {
+                    "type": "string",
+                    "description": "Workspace token to add the cost report to.\n"
+                }
+            },
+            "required": [
+                "folderToken",
+                "savedFilterTokens",
+                "title",
+                "token",
+                "workspaceToken"
+            ],
+            "inputProperties": {
+                "filter": {
+                    "type": "string",
+                    "description": "Filter query to apply to the Cost Report\n"
+                },
+                "folderToken": {
+                    "type": "string",
+                    "description": "Token of the folder this report resides in.\n"
+                },
+                "savedFilterTokens": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Saved filter tokens to be applied to the report.\n"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Title of the Cost Report\n"
+                },
+                "workspaceToken": {
+                    "type": "string",
+                    "description": "Workspace token to add the cost report to.\n"
+                }
+            },
+            "requiredInputs": [
+                "title"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering CostReport resources.\n",
+                "properties": {
+                    "filter": {
+                        "type": "string",
+                        "description": "Filter query to apply to the Cost Report\n"
+                    },
+                    "folderToken": {
+                        "type": "string",
+                        "description": "Token of the folder this report resides in.\n"
+                    },
+                    "savedFilterTokens": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Saved filter tokens to be applied to the report.\n"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "Title of the Cost Report\n"
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "Unique cost report identifier\n"
+                    },
+                    "workspaceToken": {
+                        "type": "string",
+                        "description": "Workspace token to add the cost report to.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "vantage:index/dashboard:Dashboard": {
+            "description": "Manages a Dashboard.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as vantage from \"@lbrlabs/pulumi-vantage\";\n\nconst demoDashboard = new vantage.Dashboard(\"demoDashboard\", {\n    dateInterval: \"last_month\",\n    title: \"Demo Dashboard\",\n    widgetTokens: [\"rprt_a2846903070824f4\"],\n});\n```\n```python\nimport pulumi\nimport lbrlabs_pulumi_vantage as vantage\n\ndemo_dashboard = vantage.Dashboard(\"demoDashboard\",\n    date_interval=\"last_month\",\n    title=\"Demo Dashboard\",\n    widget_tokens=[\"rprt_a2846903070824f4\"])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Vantage = Lbrlabs.PulumiPackage.Vantage;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var demoDashboard = new Vantage.Dashboard(\"demoDashboard\", new()\n    {\n        DateInterval = \"last_month\",\n        Title = \"Demo Dashboard\",\n        WidgetTokens = new[]\n        {\n            \"rprt_a2846903070824f4\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/lbrlabs/pulumi-vantage/sdk/go/vantage\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := vantage.NewDashboard(ctx, \"demoDashboard\", \u0026vantage.DashboardArgs{\n\t\t\tDateInterval: pulumi.String(\"last_month\"),\n\t\t\tTitle:        pulumi.String(\"Demo Dashboard\"),\n\t\t\tWidgetTokens: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"rprt_a2846903070824f4\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.vantage.Dashboard;\nimport com.pulumi.vantage.DashboardArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var demoDashboard = new Dashboard(\"demoDashboard\", DashboardArgs.builder()        \n            .dateInterval(\"last_month\")\n            .title(\"Demo Dashboard\")\n            .widgetTokens(\"rprt_a2846903070824f4\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  demoDashboard:\n    type: vantage:Dashboard\n    properties:\n      dateInterval: last_month\n      title: Demo Dashboard\n      widgetTokens:\n        - rprt_a2846903070824f4\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "dateBin": {
+                    "type": "string",
+                    "description": "Determines how to group costs in the Dashboard.\n"
+                },
+                "dateInterval": {
+                    "type": "string",
+                    "description": "Determines the date range in the Dashboard. Guaranteed to be set to 'custom' if 'start*date' and 'end*date' are set.\n"
+                },
+                "endDate": {
+                    "type": "string",
+                    "description": "The end date for the date range for CostReports in the Dashboard. ISO 8601 Formatted. Overwrites 'date_interval' if set.\n"
+                },
+                "startDate": {
+                    "type": "string",
+                    "description": "The start date for the date range for CostReports in the Dashboard. ISO 8601 Formatted. Overwrites 'date_interval' if set.\n"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Title of the dashboard\n"
+                },
+                "token": {
+                    "type": "string",
+                    "description": "Unique dashboard identifier\n"
+                },
+                "widgetTokens": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Tokens for widgets present in the dashboard. Currently only cost report tokens are supported.\n"
+                },
+                "workspaceToken": {
+                    "type": "string",
+                    "description": "The token for the Workspace the Dashboard is a part of.\n"
+                }
+            },
+            "required": [
+                "dateBin",
+                "dateInterval",
+                "endDate",
+                "startDate",
+                "title",
+                "token",
+                "widgetTokens",
+                "workspaceToken"
+            ],
+            "inputProperties": {
+                "dateBin": {
+                    "type": "string",
+                    "description": "Determines how to group costs in the Dashboard.\n"
+                },
+                "dateInterval": {
+                    "type": "string",
+                    "description": "Determines the date range in the Dashboard. Guaranteed to be set to 'custom' if 'start*date' and 'end*date' are set.\n"
+                },
+                "endDate": {
+                    "type": "string",
+                    "description": "The end date for the date range for CostReports in the Dashboard. ISO 8601 Formatted. Overwrites 'date_interval' if set.\n"
+                },
+                "startDate": {
+                    "type": "string",
+                    "description": "The start date for the date range for CostReports in the Dashboard. ISO 8601 Formatted. Overwrites 'date_interval' if set.\n"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Title of the dashboard\n"
+                },
+                "widgetTokens": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Tokens for widgets present in the dashboard. Currently only cost report tokens are supported.\n"
+                },
+                "workspaceToken": {
+                    "type": "string",
+                    "description": "The token for the Workspace the Dashboard is a part of.\n"
+                }
+            },
+            "requiredInputs": [
+                "title",
+                "widgetTokens"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Dashboard resources.\n",
+                "properties": {
+                    "dateBin": {
+                        "type": "string",
+                        "description": "Determines how to group costs in the Dashboard.\n"
+                    },
+                    "dateInterval": {
+                        "type": "string",
+                        "description": "Determines the date range in the Dashboard. Guaranteed to be set to 'custom' if 'start*date' and 'end*date' are set.\n"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "description": "The end date for the date range for CostReports in the Dashboard. ISO 8601 Formatted. Overwrites 'date_interval' if set.\n"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "description": "The start date for the date range for CostReports in the Dashboard. ISO 8601 Formatted. Overwrites 'date_interval' if set.\n"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "Title of the dashboard\n"
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "Unique dashboard identifier\n"
+                    },
+                    "widgetTokens": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Tokens for widgets present in the dashboard. Currently only cost report tokens are supported.\n"
+                    },
+                    "workspaceToken": {
+                        "type": "string",
+                        "description": "The token for the Workspace the Dashboard is a part of.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "vantage:index/folder:Folder": {
+            "description": "Manages a Folder.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as vantage from \"@lbrlabs/pulumi-vantage\";\n\nconst demoFolder = new vantage.Folder(\"demoFolder\", {title: \"Demo Folder\"});\n```\n```python\nimport pulumi\nimport lbrlabs_pulumi_vantage as vantage\n\ndemo_folder = vantage.Folder(\"demoFolder\", title=\"Demo Folder\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Vantage = Lbrlabs.PulumiPackage.Vantage;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var demoFolder = new Vantage.Folder(\"demoFolder\", new()\n    {\n        Title = \"Demo Folder\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/lbrlabs/pulumi-vantage/sdk/go/vantage\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := vantage.NewFolder(ctx, \"demoFolder\", \u0026vantage.FolderArgs{\n\t\t\tTitle: pulumi.String(\"Demo Folder\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.vantage.Folder;\nimport com.pulumi.vantage.FolderArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var demoFolder = new Folder(\"demoFolder\", FolderArgs.builder()        \n            .title(\"Demo Folder\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  demoFolder:\n    type: vantage:Folder\n    properties:\n      title: Demo Folder\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "parentFolderToken": {
+                    "type": "string",
+                    "description": "Token of the folder's parent folder\n"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Title of the folder\n"
+                },
+                "token": {
+                    "type": "string",
+                    "description": "Unique folder identifier\n"
+                },
+                "workspaceToken": {
+                    "type": "string",
+                    "description": "Workspace token to add the cost report to.\n"
+                }
+            },
+            "required": [
+                "parentFolderToken",
+                "title",
+                "token",
+                "workspaceToken"
+            ],
+            "inputProperties": {
+                "parentFolderToken": {
+                    "type": "string",
+                    "description": "Token of the folder's parent folder\n"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Title of the folder\n"
+                },
+                "workspaceToken": {
+                    "type": "string",
+                    "description": "Workspace token to add the cost report to.\n"
+                }
+            },
+            "requiredInputs": [
+                "title"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Folder resources.\n",
+                "properties": {
+                    "parentFolderToken": {
+                        "type": "string",
+                        "description": "Token of the folder's parent folder\n"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "Title of the folder\n"
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "Unique folder identifier\n"
+                    },
+                    "workspaceToken": {
+                        "type": "string",
+                        "description": "Workspace token to add the cost report to.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "vantage:index/savedFilter:SavedFilter": {
+            "description": "Manages a SavedFilter.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as vantage from \"@lbrlabs/pulumi-vantage\";\n\nconst demoFilter = new vantage.SavedFilter(\"demoFilter\", {\n    filter: \"(costs.provider = 'aws')\",\n    title: \"Demo Saved Filter\",\n});\n```\n```python\nimport pulumi\nimport lbrlabs_pulumi_vantage as vantage\n\ndemo_filter = vantage.SavedFilter(\"demoFilter\",\n    filter=\"(costs.provider = 'aws')\",\n    title=\"Demo Saved Filter\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Vantage = Lbrlabs.PulumiPackage.Vantage;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var demoFilter = new Vantage.SavedFilter(\"demoFilter\", new()\n    {\n        Filter = \"(costs.provider = 'aws')\",\n        Title = \"Demo Saved Filter\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/lbrlabs/pulumi-vantage/sdk/go/vantage\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := vantage.NewSavedFilter(ctx, \"demoFilter\", \u0026vantage.SavedFilterArgs{\n\t\t\tFilter: pulumi.String(\"(costs.provider = 'aws')\"),\n\t\t\tTitle:  pulumi.String(\"Demo Saved Filter\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.vantage.SavedFilter;\nimport com.pulumi.vantage.SavedFilterArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var demoFilter = new SavedFilter(\"demoFilter\", SavedFilterArgs.builder()        \n            .filter(\"(costs.provider = 'aws')\")\n            .title(\"Demo Saved Filter\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  demoFilter:\n    type: vantage:SavedFilter\n    properties:\n      filter: (costs.provider = 'aws')\n      title: Demo Saved Filter\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "filter": {
+                    "type": "string",
+                    "description": "VQL Query used for this saved filter.\n"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Title of the Saved Filter\n"
+                },
+                "token": {
+                    "type": "string",
+                    "description": "Unique saved filter identifier\n"
+                },
+                "workspaceToken": {
+                    "type": "string",
+                    "description": "Workspace token to add the saved filter into.\n"
+                }
+            },
+            "required": [
+                "filter",
+                "title",
+                "token",
+                "workspaceToken"
+            ],
+            "inputProperties": {
+                "filter": {
+                    "type": "string",
+                    "description": "VQL Query used for this saved filter.\n"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Title of the Saved Filter\n"
+                },
+                "workspaceToken": {
+                    "type": "string",
+                    "description": "Workspace token to add the saved filter into.\n"
+                }
+            },
+            "requiredInputs": [
+                "title"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering SavedFilter resources.\n",
+                "properties": {
+                    "filter": {
+                        "type": "string",
+                        "description": "VQL Query used for this saved filter.\n"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "Title of the Saved Filter\n"
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "Unique saved filter identifier\n"
+                    },
+                    "workspaceToken": {
+                        "type": "string",
+                        "description": "Workspace token to add the saved filter into.\n"
+                    }
+                },
+                "type": "object"
+            }
         }
     },
     "functions": {
@@ -168,6 +561,28 @@
                     "externalId",
                     "iamRoleArn",
                     "rootPolicy",
+                    "id"
+                ]
+            }
+        },
+        "vantage:index/savedFilters:SavedFilters": {
+            "outputs": {
+                "description": "A collection of values returned by SavedFilters.\n",
+                "properties": {
+                    "filters": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/vantage:index/SavedFiltersFilter:SavedFiltersFilter"
+                        }
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "filters",
                     "id"
                 ]
             }
