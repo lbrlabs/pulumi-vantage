@@ -82,11 +82,17 @@ func Provider() tfpfbridge.ProviderInfo {
 			"vantage_aws_provider": {
 				Tok: vantageResource(vantageMod, "AwsProvider"),
 			},
+			"vantage_access_grant": {
+				Tok: vantageResource(vantageMod, "AccessGrant"),
+			},
 			"vantage_cost_report": {
 				Tok: vantageResource(vantageMod, "CostReport"),
 			},
 			"vantage_dashboard": {
 				Tok: vantageResource(vantageMod, "Dashboard"),
+			},
+			"vantage_segment": {
+				Tok: vantageResource(vantageMod, "Segment"),
 			},
 			"vantage_folder": {
 				Tok: vantageResource(vantageMod, "Folder"),
@@ -94,10 +100,21 @@ func Provider() tfpfbridge.ProviderInfo {
 			"vantage_saved_filter": {
 				Tok: vantageResource(vantageMod, "SavedFilter"),
 			},
+			"vantage_team": {
+				Tok: vantageResource(vantageMod, "Team"),
+			},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			"vantage_aws_provider_info": {Tok: vantageDataSource(vantageMod, "getAwsProviderInfo")},
-			"vantage_saved_filters": {Tok: vantageDataSource(vantageMod, "SavedFilters")},
+			"vantage_access_grants":     {Tok: vantageDataSource(vantageMod, "getAccessGrants")},
+			"vantage_cost_reports":      {Tok: vantageDataSource(vantageMod, "getCostReports")},
+			"vantage_dashboards":        {Tok: vantageDataSource(vantageMod, "getDashboards")},
+			"vantage_folders":           {Tok: vantageDataSource(vantageMod, "getFolders")},
+			"vantage_segments":          {Tok: vantageDataSource(vantageMod, "getSegments")},
+			"vantage_teams":             {Tok: vantageDataSource(vantageMod, "getTeams")},
+			"vantage_users":             {Tok: vantageDataSource(vantageMod, "getUsers")},
+			"vantage_workspaces":        {Tok: vantageDataSource(vantageMod, "getWorkspaces")},
+			"vantage_saved_filters":     {Tok: vantageDataSource(vantageMod, "SavedFilters")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: "@lbrlabs/pulumi-vantage",

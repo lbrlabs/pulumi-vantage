@@ -5,6 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
+export { AccessGrantArgs, AccessGrantState } from "./accessGrant";
+export type AccessGrant = import("./accessGrant").AccessGrant;
+export const AccessGrant: typeof import("./accessGrant").AccessGrant = null as any;
+utilities.lazyLoad(exports, ["AccessGrant"], () => require("./accessGrant"));
+
 export { AwsProviderArgs, AwsProviderState } from "./awsProvider";
 export type AwsProvider = import("./awsProvider").AwsProvider;
 export const AwsProvider: typeof import("./awsProvider").AwsProvider = null as any;
@@ -25,9 +30,41 @@ export type Folder = import("./folder").Folder;
 export const Folder: typeof import("./folder").Folder = null as any;
 utilities.lazyLoad(exports, ["Folder"], () => require("./folder"));
 
+export { GetAccessGrantsResult } from "./getAccessGrants";
+export const getAccessGrants: typeof import("./getAccessGrants").getAccessGrants = null as any;
+utilities.lazyLoad(exports, ["getAccessGrants"], () => require("./getAccessGrants"));
+
 export { GetAwsProviderInfoResult } from "./getAwsProviderInfo";
 export const getAwsProviderInfo: typeof import("./getAwsProviderInfo").getAwsProviderInfo = null as any;
 utilities.lazyLoad(exports, ["getAwsProviderInfo"], () => require("./getAwsProviderInfo"));
+
+export { GetCostReportsResult } from "./getCostReports";
+export const getCostReports: typeof import("./getCostReports").getCostReports = null as any;
+utilities.lazyLoad(exports, ["getCostReports"], () => require("./getCostReports"));
+
+export { GetDashboardsResult } from "./getDashboards";
+export const getDashboards: typeof import("./getDashboards").getDashboards = null as any;
+utilities.lazyLoad(exports, ["getDashboards"], () => require("./getDashboards"));
+
+export { GetFoldersResult } from "./getFolders";
+export const getFolders: typeof import("./getFolders").getFolders = null as any;
+utilities.lazyLoad(exports, ["getFolders"], () => require("./getFolders"));
+
+export { GetSegmentsResult } from "./getSegments";
+export const getSegments: typeof import("./getSegments").getSegments = null as any;
+utilities.lazyLoad(exports, ["getSegments"], () => require("./getSegments"));
+
+export { GetTeamsResult } from "./getTeams";
+export const getTeams: typeof import("./getTeams").getTeams = null as any;
+utilities.lazyLoad(exports, ["getTeams"], () => require("./getTeams"));
+
+export { GetUsersResult } from "./getUsers";
+export const getUsers: typeof import("./getUsers").getUsers = null as any;
+utilities.lazyLoad(exports, ["getUsers"], () => require("./getUsers"));
+
+export { GetWorkspacesResult } from "./getWorkspaces";
+export const getWorkspaces: typeof import("./getWorkspaces").getWorkspaces = null as any;
+utilities.lazyLoad(exports, ["getWorkspaces"], () => require("./getWorkspaces"));
 
 export { ProviderArgs } from "./provider";
 export type Provider = import("./provider").Provider;
@@ -43,6 +80,16 @@ export { SavedFiltersResult } from "./savedFilters";
 export const savedFilters: typeof import("./savedFilters").savedFilters = null as any;
 utilities.lazyLoad(exports, ["savedFilters"], () => require("./savedFilters"));
 
+export { SegmentArgs, SegmentState } from "./segment";
+export type Segment = import("./segment").Segment;
+export const Segment: typeof import("./segment").Segment = null as any;
+utilities.lazyLoad(exports, ["Segment"], () => require("./segment"));
+
+export { TeamArgs, TeamState } from "./team";
+export type Team = import("./team").Team;
+export const Team: typeof import("./team").Team = null as any;
+utilities.lazyLoad(exports, ["Team"], () => require("./team"));
+
 
 // Export sub-modules:
 import * as config from "./config";
@@ -57,6 +104,8 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "vantage:index/accessGrant:AccessGrant":
+                return new AccessGrant(name, <any>undefined, { urn })
             case "vantage:index/awsProvider:AwsProvider":
                 return new AwsProvider(name, <any>undefined, { urn })
             case "vantage:index/costReport:CostReport":
@@ -67,16 +116,23 @@ const _module = {
                 return new Folder(name, <any>undefined, { urn })
             case "vantage:index/savedFilter:SavedFilter":
                 return new SavedFilter(name, <any>undefined, { urn })
+            case "vantage:index/segment:Segment":
+                return new Segment(name, <any>undefined, { urn })
+            case "vantage:index/team:Team":
+                return new Team(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
     },
 };
+pulumi.runtime.registerResourceModule("vantage", "index/accessGrant", _module)
 pulumi.runtime.registerResourceModule("vantage", "index/awsProvider", _module)
 pulumi.runtime.registerResourceModule("vantage", "index/costReport", _module)
 pulumi.runtime.registerResourceModule("vantage", "index/dashboard", _module)
 pulumi.runtime.registerResourceModule("vantage", "index/folder", _module)
 pulumi.runtime.registerResourceModule("vantage", "index/savedFilter", _module)
+pulumi.runtime.registerResourceModule("vantage", "index/segment", _module)
+pulumi.runtime.registerResourceModule("vantage", "index/team", _module)
 pulumi.runtime.registerResourcePackage("vantage", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

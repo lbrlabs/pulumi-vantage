@@ -20,6 +20,8 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "vantage:index/accessGrant:AccessGrant":
+		r = &AccessGrant{}
 	case "vantage:index/awsProvider:AwsProvider":
 		r = &AwsProvider{}
 	case "vantage:index/costReport:CostReport":
@@ -30,6 +32,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Folder{}
 	case "vantage:index/savedFilter:SavedFilter":
 		r = &SavedFilter{}
+	case "vantage:index/segment:Segment":
+		r = &Segment{}
+	case "vantage:index/team:Team":
+		r = &Team{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -60,6 +66,11 @@ func init() {
 	version, _ := PkgVersion()
 	pulumi.RegisterResourceModule(
 		"vantage",
+		"index/accessGrant",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"vantage",
 		"index/awsProvider",
 		&module{version},
 	)
@@ -81,6 +92,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"vantage",
 		"index/savedFilter",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"vantage",
+		"index/segment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"vantage",
+		"index/team",
 		&module{version},
 	)
 	pulumi.RegisterResourcePackage(

@@ -9,31 +9,75 @@ import java.util.Objects;
 
 @CustomType
 public final class GetAwsProviderInfoResult {
+    /**
+     * @return The policy that allows Vantage to list and describe resources from your AWS account.
+     * 
+     */
     private String additionalResourcesPolicy;
+    /**
+     * @return The policy that allows Vantage to manage autopilot.
+     * 
+     */
     private String autopilotPolicy;
+    /**
+     * @return The policy that allows Vantage to retrieve cloudwatch metrics from your AWS account.
+     * 
+     */
     private String cloudwatchMetricsPolicy;
+    /**
+     * @return The Vantage external ID to authenticate your account.
+     * 
+     */
     private String externalId;
+    /**
+     * @return The IAM role that Vantage assumes into your account.
+     * 
+     */
     private String iamRoleArn;
     /**
      * @return The provider-assigned unique ID for this managed resource.
      * 
      */
     private String id;
+    /**
+     * @return The policy that allows Vantage to manage autopilot.
+     * 
+     */
     private String rootPolicy;
 
     private GetAwsProviderInfoResult() {}
+    /**
+     * @return The policy that allows Vantage to list and describe resources from your AWS account.
+     * 
+     */
     public String additionalResourcesPolicy() {
         return this.additionalResourcesPolicy;
     }
+    /**
+     * @return The policy that allows Vantage to manage autopilot.
+     * 
+     */
     public String autopilotPolicy() {
         return this.autopilotPolicy;
     }
+    /**
+     * @return The policy that allows Vantage to retrieve cloudwatch metrics from your AWS account.
+     * 
+     */
     public String cloudwatchMetricsPolicy() {
         return this.cloudwatchMetricsPolicy;
     }
+    /**
+     * @return The Vantage external ID to authenticate your account.
+     * 
+     */
     public String externalId() {
         return this.externalId;
     }
+    /**
+     * @return The IAM role that Vantage assumes into your account.
+     * 
+     */
     public String iamRoleArn() {
         return this.iamRoleArn;
     }
@@ -44,6 +88,10 @@ public final class GetAwsProviderInfoResult {
     public String id() {
         return this.id;
     }
+    /**
+     * @return The policy that allows Vantage to manage autopilot.
+     * 
+     */
     public String rootPolicy() {
         return this.rootPolicy;
     }

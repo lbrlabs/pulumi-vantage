@@ -20,15 +20,33 @@ namespace Lbrlabs.PulumiPackage.Vantage
     [OutputType]
     public sealed class GetAwsProviderInfoResult
     {
+        /// <summary>
+        /// The policy that allows Vantage to list and describe resources from your AWS account.
+        /// </summary>
         public readonly string AdditionalResourcesPolicy;
+        /// <summary>
+        /// The policy that allows Vantage to manage autopilot.
+        /// </summary>
         public readonly string AutopilotPolicy;
+        /// <summary>
+        /// The policy that allows Vantage to retrieve cloudwatch metrics from your AWS account.
+        /// </summary>
         public readonly string CloudwatchMetricsPolicy;
+        /// <summary>
+        /// The Vantage external ID to authenticate your account.
+        /// </summary>
         public readonly string ExternalId;
+        /// <summary>
+        /// The IAM role that Vantage assumes into your account.
+        /// </summary>
         public readonly string IamRoleArn;
         /// <summary>
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        /// <summary>
+        /// The policy that allows Vantage to manage autopilot.
+        /// </summary>
         public readonly string RootPolicy;
 
         [OutputConstructor]
