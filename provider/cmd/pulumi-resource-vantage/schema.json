@@ -97,6 +97,248 @@
                     "requiredInputs": []
                 }
             }
+        },
+        "vantage:index/getAccessGrantsAccessGrant:getAccessGrantsAccessGrant": {
+            "properties": {
+                "access": {
+                    "type": "string"
+                },
+                "resourceToken": {
+                    "type": "string"
+                },
+                "teamToken": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "access",
+                "resourceToken",
+                "teamToken",
+                "token"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "vantage:index/getCostReportsCostReport:getCostReportsCostReport": {
+            "properties": {
+                "filter": {
+                    "type": "string"
+                },
+                "folderToken": {
+                    "type": "string"
+                },
+                "savedFilterTokens": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "workspaceToken": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "filter",
+                "folderToken",
+                "savedFilterTokens",
+                "title",
+                "token",
+                "workspaceToken"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "vantage:index/getDashboardsDashboard:getDashboardsDashboard": {
+            "properties": {
+                "dateBin": {
+                    "type": "string"
+                },
+                "dateInterval": {
+                    "type": "string"
+                },
+                "endDate": {
+                    "type": "string"
+                },
+                "startDate": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "widgetTokens": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "workspaceToken": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "dateBin",
+                "dateInterval",
+                "endDate",
+                "startDate",
+                "title",
+                "token",
+                "widgetTokens",
+                "workspaceToken"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "vantage:index/getFoldersFolder:getFoldersFolder": {
+            "properties": {
+                "parentFolderToken": {
+                    "type": "string"
+                },
+                "savedFilterTokens": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "workspaceToken": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "parentFolderToken",
+                "savedFilterTokens",
+                "title",
+                "token",
+                "workspaceToken"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "vantage:index/getTeamsTeam:getTeamsTeam": {
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "userEmails": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "userTokens": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "workspaceTokens": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "description",
+                "name",
+                "token",
+                "userEmails",
+                "userTokens",
+                "workspaceTokens"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "vantage:index/getUsersUser:getUsersUser": {
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "email",
+                "name",
+                "role",
+                "token"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "vantage:index/getWorkspacesWorkspace:getWorkspacesWorkspace": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "required": [
+                "name",
+                "token"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
         }
     },
     "provider": {
@@ -121,6 +363,73 @@
         }
     },
     "resources": {
+        "vantage:index/accessGrant:AccessGrant": {
+            "description": "Manages an AccessGrant.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as vantage from \"@lbrlabs/pulumi-vantage\";\n\nconst demoAccessGrant = new vantage.AccessGrant(\"demoAccessGrant\", {\n    resourceToken: \"rprt_39d256c871cb6b2b\",\n    teamToken: \"team_bd5c2d8abc233bfd\",\n});\n```\n```python\nimport pulumi\nimport lbrlabs_pulumi_vantage as vantage\n\ndemo_access_grant = vantage.AccessGrant(\"demoAccessGrant\",\n    resource_token=\"rprt_39d256c871cb6b2b\",\n    team_token=\"team_bd5c2d8abc233bfd\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Vantage = Lbrlabs.PulumiPackage.Vantage;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var demoAccessGrant = new Vantage.AccessGrant(\"demoAccessGrant\", new()\n    {\n        ResourceToken = \"rprt_39d256c871cb6b2b\",\n        TeamToken = \"team_bd5c2d8abc233bfd\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/lbrlabs/pulumi-vantage/sdk/go/vantage\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := vantage.NewAccessGrant(ctx, \"demoAccessGrant\", \u0026vantage.AccessGrantArgs{\n\t\t\tResourceToken: pulumi.String(\"rprt_39d256c871cb6b2b\"),\n\t\t\tTeamToken:     pulumi.String(\"team_bd5c2d8abc233bfd\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.vantage.AccessGrant;\nimport com.pulumi.vantage.AccessGrantArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var demoAccessGrant = new AccessGrant(\"demoAccessGrant\", AccessGrantArgs.builder()        \n            .resourceToken(\"rprt_39d256c871cb6b2b\")\n            .teamToken(\"team_bd5c2d8abc233bfd\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  demoAccessGrant:\n    type: vantage:AccessGrant\n    properties:\n      resourceToken: rprt_39d256c871cb6b2b\n      teamToken: team_bd5c2d8abc233bfd\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "access": {
+                    "type": "string",
+                    "description": "Access level of the grant. Must be either `allowed` or `denied`.\n"
+                },
+                "resourceToken": {
+                    "type": "string",
+                    "description": "Token of the resource being granted.\n"
+                },
+                "teamToken": {
+                    "type": "string",
+                    "description": "Token of the team being granted.\n"
+                },
+                "token": {
+                    "type": "string",
+                    "description": "Token of the access grant.\n"
+                }
+            },
+            "required": [
+                "access",
+                "resourceToken",
+                "teamToken",
+                "token"
+            ],
+            "inputProperties": {
+                "access": {
+                    "type": "string",
+                    "description": "Access level of the grant. Must be either `allowed` or `denied`.\n"
+                },
+                "resourceToken": {
+                    "type": "string",
+                    "description": "Token of the resource being granted.\n"
+                },
+                "teamToken": {
+                    "type": "string",
+                    "description": "Token of the team being granted.\n"
+                }
+            },
+            "requiredInputs": [
+                "resourceToken",
+                "teamToken"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AccessGrant resources.\n",
+                "properties": {
+                    "access": {
+                        "type": "string",
+                        "description": "Access level of the grant. Must be either `allowed` or `denied`.\n"
+                    },
+                    "resourceToken": {
+                        "type": "string",
+                        "description": "Token of the resource being granted.\n"
+                    },
+                    "teamToken": {
+                        "type": "string",
+                        "description": "Token of the team being granted.\n"
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "Token of the access grant.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "vantage:index/awsProvider:AwsProvider": {
             "description": "Manages an AWS Account Integration.\n",
             "properties": {
@@ -523,34 +832,298 @@
                 },
                 "type": "object"
             }
+        },
+        "vantage:index/segment:Segment": {
+            "description": "Manages a Segment.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as vantage from \"@lbrlabs/pulumi-vantage\";\n\nconst demoSegment = new vantage.Segment(\"demoSegment\", {\n    description: \"This is still a demo segment\",\n    filter: \"(costs.provider = 'aws' AND tags.name = NULL)\",\n    priority: 50,\n    title: \"Demo Segment\",\n    trackUnallocated: false,\n});\n```\n```python\nimport pulumi\nimport lbrlabs_pulumi_vantage as vantage\n\ndemo_segment = vantage.Segment(\"demoSegment\",\n    description=\"This is still a demo segment\",\n    filter=\"(costs.provider = 'aws' AND tags.name = NULL)\",\n    priority=50,\n    title=\"Demo Segment\",\n    track_unallocated=False)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Vantage = Lbrlabs.PulumiPackage.Vantage;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var demoSegment = new Vantage.Segment(\"demoSegment\", new()\n    {\n        Description = \"This is still a demo segment\",\n        Filter = \"(costs.provider = 'aws' AND tags.name = NULL)\",\n        Priority = 50,\n        Title = \"Demo Segment\",\n        TrackUnallocated = false,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/lbrlabs/pulumi-vantage/sdk/go/vantage\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := vantage.NewSegment(ctx, \"demoSegment\", \u0026vantage.SegmentArgs{\n\t\t\tDescription:      pulumi.String(\"This is still a demo segment\"),\n\t\t\tFilter:           pulumi.String(\"(costs.provider = 'aws' AND tags.name = NULL)\"),\n\t\t\tPriority:         pulumi.Int(50),\n\t\t\tTitle:            pulumi.String(\"Demo Segment\"),\n\t\t\tTrackUnallocated: pulumi.Bool(false),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.vantage.Segment;\nimport com.pulumi.vantage.SegmentArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var demoSegment = new Segment(\"demoSegment\", SegmentArgs.builder()        \n            .description(\"This is still a demo segment\")\n            .filter(\"(costs.provider = 'aws' AND tags.name = NULL)\")\n            .priority(50)\n            .title(\"Demo Segment\")\n            .trackUnallocated(false)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  demoSegment:\n    type: vantage:Segment\n    properties:\n      description: This is still a demo segment\n      filter: (costs.provider = 'aws' AND tags.name = NULL)\n      priority: 50\n      title: Demo Segment\n      trackUnallocated: false\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Segment.\n"
+                },
+                "filter": {
+                    "type": "string",
+                    "description": "The filter query language to apply to the Segment. Additional documentation available at https://docs.vantage.sh/vql.\n"
+                },
+                "parentSegmentToken": {
+                    "type": "string",
+                    "description": "The token of the parent Segment this new Segment belongs to. Determines the Workspace the segment is assigned to.\n"
+                },
+                "priority": {
+                    "type": "integer",
+                    "description": "The priority of the Segment.\n"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "The title of the Segment.\n"
+                },
+                "token": {
+                    "type": "string",
+                    "description": "Unique segment identifier\n"
+                },
+                "trackUnallocated": {
+                    "type": "boolean",
+                    "description": "Whether or not to track unallocated resources in this Segment.\n"
+                },
+                "workspaceToken": {
+                    "type": "string",
+                    "description": "Workspace token to add the segment to.\n"
+                }
+            },
+            "required": [
+                "filter",
+                "parentSegmentToken",
+                "priority",
+                "title",
+                "token",
+                "trackUnallocated",
+                "workspaceToken"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the Segment.\n"
+                },
+                "filter": {
+                    "type": "string",
+                    "description": "The filter query language to apply to the Segment. Additional documentation available at https://docs.vantage.sh/vql.\n"
+                },
+                "parentSegmentToken": {
+                    "type": "string",
+                    "description": "The token of the parent Segment this new Segment belongs to. Determines the Workspace the segment is assigned to.\n"
+                },
+                "priority": {
+                    "type": "integer",
+                    "description": "The priority of the Segment.\n"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "The title of the Segment.\n"
+                },
+                "trackUnallocated": {
+                    "type": "boolean",
+                    "description": "Whether or not to track unallocated resources in this Segment.\n"
+                },
+                "workspaceToken": {
+                    "type": "string",
+                    "description": "Workspace token to add the segment to.\n"
+                }
+            },
+            "requiredInputs": [
+                "title"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Segment resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the Segment.\n"
+                    },
+                    "filter": {
+                        "type": "string",
+                        "description": "The filter query language to apply to the Segment. Additional documentation available at https://docs.vantage.sh/vql.\n"
+                    },
+                    "parentSegmentToken": {
+                        "type": "string",
+                        "description": "The token of the parent Segment this new Segment belongs to. Determines the Workspace the segment is assigned to.\n"
+                    },
+                    "priority": {
+                        "type": "integer",
+                        "description": "The priority of the Segment.\n"
+                    },
+                    "title": {
+                        "type": "string",
+                        "description": "The title of the Segment.\n"
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "Unique segment identifier\n"
+                    },
+                    "trackUnallocated": {
+                        "type": "boolean",
+                        "description": "Whether or not to track unallocated resources in this Segment.\n"
+                    },
+                    "workspaceToken": {
+                        "type": "string",
+                        "description": "Workspace token to add the segment to.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "vantage:index/team:Team": {
+            "description": "Manages a Team.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as vantage from \"@lbrlabs/pulumi-vantage\";\n\nconst demoTeam = new vantage.Team(\"demoTeam\", {\n    description: \"Demo Team Description\",\n    name: \"Demo Team\",\n    userEmails: [\"support@vantage.sh\"],\n    workspaceTokens: [\"wrkspc_47c3254c790e9351\"],\n});\n```\n```python\nimport pulumi\nimport lbrlabs_pulumi_vantage as vantage\n\ndemo_team = vantage.Team(\"demoTeam\",\n    description=\"Demo Team Description\",\n    name=\"Demo Team\",\n    user_emails=[\"support@vantage.sh\"],\n    workspace_tokens=[\"wrkspc_47c3254c790e9351\"])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Vantage = Lbrlabs.PulumiPackage.Vantage;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var demoTeam = new Vantage.Team(\"demoTeam\", new()\n    {\n        Description = \"Demo Team Description\",\n        Name = \"Demo Team\",\n        UserEmails = new[]\n        {\n            \"support@vantage.sh\",\n        },\n        WorkspaceTokens = new[]\n        {\n            \"wrkspc_47c3254c790e9351\",\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/lbrlabs/pulumi-vantage/sdk/go/vantage\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := vantage.NewTeam(ctx, \"demoTeam\", \u0026vantage.TeamArgs{\n\t\t\tDescription: pulumi.String(\"Demo Team Description\"),\n\t\t\tName:        pulumi.String(\"Demo Team\"),\n\t\t\tUserEmails: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"support@vantage.sh\"),\n\t\t\t},\n\t\t\tWorkspaceTokens: pulumi.StringArray{\n\t\t\t\tpulumi.String(\"wrkspc_47c3254c790e9351\"),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.vantage.Team;\nimport com.pulumi.vantage.TeamArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var demoTeam = new Team(\"demoTeam\", TeamArgs.builder()        \n            .description(\"Demo Team Description\")\n            .name(\"Demo Team\")\n            .userEmails(\"support@vantage.sh\")\n            .workspaceTokens(\"wrkspc_47c3254c790e9351\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  demoTeam:\n    type: vantage:Team\n    properties:\n      description: Demo Team Description\n      name: Demo Team\n      userEmails:\n        - support@vantage.sh\n      workspaceTokens:\n        - wrkspc_47c3254c790e9351\n```\n{{% /example %}}\n{{% /examples %}}",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "Description of the team.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the team.\n"
+                },
+                "token": {
+                    "type": "string",
+                    "description": "Unique team identifier.\n"
+                },
+                "userEmails": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "User emails.\n"
+                },
+                "userTokens": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "User tokens.\n"
+                },
+                "workspaceTokens": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Workspace tokens to add the team to.\n"
+                }
+            },
+            "required": [
+                "name",
+                "token",
+                "userEmails",
+                "userTokens",
+                "workspaceTokens"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "Description of the team.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the team.\n"
+                },
+                "userEmails": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "User emails.\n"
+                },
+                "userTokens": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "User tokens.\n"
+                },
+                "workspaceTokens": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Workspace tokens to add the team to.\n"
+                }
+            },
+            "requiredInputs": [
+                "name"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Team resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "Description of the team.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the team.\n"
+                    },
+                    "token": {
+                        "type": "string",
+                        "description": "Unique team identifier.\n"
+                    },
+                    "userEmails": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "User emails.\n"
+                    },
+                    "userTokens": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "User tokens.\n"
+                    },
+                    "workspaceTokens": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Workspace tokens to add the team to.\n"
+                    }
+                },
+                "type": "object"
+            }
         }
     },
     "functions": {
+        "vantage:index/getAccessGrants:getAccessGrants": {
+            "outputs": {
+                "description": "A collection of values returned by getAccessGrants.\n",
+                "properties": {
+                    "accessGrants": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/vantage:index/getAccessGrantsAccessGrant:getAccessGrantsAccessGrant"
+                        }
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "accessGrants",
+                    "id"
+                ]
+            }
+        },
         "vantage:index/getAwsProviderInfo:getAwsProviderInfo": {
             "outputs": {
                 "description": "A collection of values returned by getAwsProviderInfo.\n",
                 "properties": {
                     "additionalResourcesPolicy": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The policy that allows Vantage to list and describe resources from your AWS account.\n"
                     },
                     "autopilotPolicy": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The policy that allows Vantage to manage autopilot.\n"
                     },
                     "cloudwatchMetricsPolicy": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The policy that allows Vantage to retrieve cloudwatch metrics from your AWS account.\n"
                     },
                     "externalId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The Vantage external ID to authenticate your account.\n",
+                        "secret": true
                     },
                     "iamRoleArn": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The IAM role that Vantage assumes into your account.\n"
                     },
                     "id": {
                         "type": "string",
                         "description": "The provider-assigned unique ID for this managed resource.\n"
                     },
                     "rootPolicy": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "The policy that allows Vantage to manage autopilot.\n"
                     }
                 },
                 "type": "object",
@@ -561,6 +1134,153 @@
                     "externalId",
                     "iamRoleArn",
                     "rootPolicy",
+                    "id"
+                ]
+            }
+        },
+        "vantage:index/getCostReports:getCostReports": {
+            "outputs": {
+                "description": "A collection of values returned by getCostReports.\n",
+                "properties": {
+                    "costReports": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/vantage:index/getCostReportsCostReport:getCostReportsCostReport"
+                        }
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "costReports",
+                    "id"
+                ]
+            }
+        },
+        "vantage:index/getDashboards:getDashboards": {
+            "outputs": {
+                "description": "A collection of values returned by getDashboards.\n",
+                "properties": {
+                    "dashboards": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/vantage:index/getDashboardsDashboard:getDashboardsDashboard"
+                        }
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "dashboards",
+                    "id"
+                ]
+            }
+        },
+        "vantage:index/getFolders:getFolders": {
+            "outputs": {
+                "description": "A collection of values returned by getFolders.\n",
+                "properties": {
+                    "folders": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/vantage:index/getFoldersFolder:getFoldersFolder"
+                        }
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "folders",
+                    "id"
+                ]
+            }
+        },
+        "vantage:index/getSegments:getSegments": {
+            "outputs": {
+                "description": "A collection of values returned by getSegments.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ]
+            }
+        },
+        "vantage:index/getTeams:getTeams": {
+            "outputs": {
+                "description": "A collection of values returned by getTeams.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "teams": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/vantage:index/getTeamsTeam:getTeamsTeam"
+                        }
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "teams",
+                    "id"
+                ]
+            }
+        },
+        "vantage:index/getUsers:getUsers": {
+            "outputs": {
+                "description": "A collection of values returned by getUsers.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "users": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/vantage:index/getUsersUser:getUsersUser"
+                        }
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "users",
+                    "id"
+                ]
+            }
+        },
+        "vantage:index/getWorkspaces:getWorkspaces": {
+            "outputs": {
+                "description": "A collection of values returned by getWorkspaces.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "workspaces": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/vantage:index/getWorkspacesWorkspace:getWorkspacesWorkspace"
+                        }
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "workspaces",
                     "id"
                 ]
             }

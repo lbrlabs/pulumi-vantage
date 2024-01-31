@@ -5,6 +5,62 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
+export interface GetAccessGrantsAccessGrant {
+    access: string;
+    resourceToken: string;
+    teamToken: string;
+    token: string;
+}
+
+export interface GetCostReportsCostReport {
+    filter: string;
+    folderToken: string;
+    savedFilterTokens: string[];
+    title: string;
+    token: string;
+    workspaceToken: string;
+}
+
+export interface GetDashboardsDashboard {
+    dateBin: string;
+    dateInterval: string;
+    endDate: string;
+    startDate: string;
+    title: string;
+    token: string;
+    widgetTokens: string[];
+    workspaceToken: string;
+}
+
+export interface GetFoldersFolder {
+    parentFolderToken: string;
+    savedFilterTokens: string[];
+    title: string;
+    token: string;
+    workspaceToken: string;
+}
+
+export interface GetTeamsTeam {
+    description: string;
+    name: string;
+    token: string;
+    userEmails: string[];
+    userTokens: string[];
+    workspaceTokens: string[];
+}
+
+export interface GetUsersUser {
+    email: string;
+    name: string;
+    role: string;
+    token: string;
+}
+
+export interface GetWorkspacesWorkspace {
+    name: string;
+    token: string;
+}
+
 export interface SavedFiltersFilter {
     costReportTokens: string[];
     title: string;

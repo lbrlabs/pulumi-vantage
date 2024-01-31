@@ -9,11 +9,37 @@ import com.pulumi.deployment.Deployment;
 import com.pulumi.deployment.InvokeOptions;
 import com.pulumi.resources.InvokeArgs;
 import com.pulumi.vantage.Utilities;
+import com.pulumi.vantage.outputs.GetAccessGrantsResult;
 import com.pulumi.vantage.outputs.GetAwsProviderInfoResult;
+import com.pulumi.vantage.outputs.GetCostReportsResult;
+import com.pulumi.vantage.outputs.GetDashboardsResult;
+import com.pulumi.vantage.outputs.GetFoldersResult;
+import com.pulumi.vantage.outputs.GetSegmentsResult;
+import com.pulumi.vantage.outputs.GetTeamsResult;
+import com.pulumi.vantage.outputs.GetUsersResult;
+import com.pulumi.vantage.outputs.GetWorkspacesResult;
 import com.pulumi.vantage.outputs.SavedFiltersResult;
 import java.util.concurrent.CompletableFuture;
 
 public final class VantageFunctions {
+    public static Output<GetAccessGrantsResult> getAccessGrants() {
+        return getAccessGrants(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<GetAccessGrantsResult> getAccessGrantsPlain() {
+        return getAccessGrantsPlain(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static Output<GetAccessGrantsResult> getAccessGrants(InvokeArgs args) {
+        return getAccessGrants(args, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<GetAccessGrantsResult> getAccessGrantsPlain(InvokeArgs args) {
+        return getAccessGrantsPlain(args, InvokeOptions.Empty);
+    }
+    public static Output<GetAccessGrantsResult> getAccessGrants(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vantage:index/getAccessGrants:getAccessGrants", TypeShape.of(GetAccessGrantsResult.class), args, Utilities.withVersion(options));
+    }
+    public static CompletableFuture<GetAccessGrantsResult> getAccessGrantsPlain(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vantage:index/getAccessGrants:getAccessGrants", TypeShape.of(GetAccessGrantsResult.class), args, Utilities.withVersion(options));
+    }
     public static Output<GetAwsProviderInfoResult> getAwsProviderInfo() {
         return getAwsProviderInfo(InvokeArgs.Empty, InvokeOptions.Empty);
     }
@@ -31,6 +57,132 @@ public final class VantageFunctions {
     }
     public static CompletableFuture<GetAwsProviderInfoResult> getAwsProviderInfoPlain(InvokeArgs args, InvokeOptions options) {
         return Deployment.getInstance().invokeAsync("vantage:index/getAwsProviderInfo:getAwsProviderInfo", TypeShape.of(GetAwsProviderInfoResult.class), args, Utilities.withVersion(options));
+    }
+    public static Output<GetCostReportsResult> getCostReports() {
+        return getCostReports(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<GetCostReportsResult> getCostReportsPlain() {
+        return getCostReportsPlain(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static Output<GetCostReportsResult> getCostReports(InvokeArgs args) {
+        return getCostReports(args, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<GetCostReportsResult> getCostReportsPlain(InvokeArgs args) {
+        return getCostReportsPlain(args, InvokeOptions.Empty);
+    }
+    public static Output<GetCostReportsResult> getCostReports(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vantage:index/getCostReports:getCostReports", TypeShape.of(GetCostReportsResult.class), args, Utilities.withVersion(options));
+    }
+    public static CompletableFuture<GetCostReportsResult> getCostReportsPlain(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vantage:index/getCostReports:getCostReports", TypeShape.of(GetCostReportsResult.class), args, Utilities.withVersion(options));
+    }
+    public static Output<GetDashboardsResult> getDashboards() {
+        return getDashboards(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<GetDashboardsResult> getDashboardsPlain() {
+        return getDashboardsPlain(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static Output<GetDashboardsResult> getDashboards(InvokeArgs args) {
+        return getDashboards(args, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<GetDashboardsResult> getDashboardsPlain(InvokeArgs args) {
+        return getDashboardsPlain(args, InvokeOptions.Empty);
+    }
+    public static Output<GetDashboardsResult> getDashboards(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vantage:index/getDashboards:getDashboards", TypeShape.of(GetDashboardsResult.class), args, Utilities.withVersion(options));
+    }
+    public static CompletableFuture<GetDashboardsResult> getDashboardsPlain(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vantage:index/getDashboards:getDashboards", TypeShape.of(GetDashboardsResult.class), args, Utilities.withVersion(options));
+    }
+    public static Output<GetFoldersResult> getFolders() {
+        return getFolders(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<GetFoldersResult> getFoldersPlain() {
+        return getFoldersPlain(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static Output<GetFoldersResult> getFolders(InvokeArgs args) {
+        return getFolders(args, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<GetFoldersResult> getFoldersPlain(InvokeArgs args) {
+        return getFoldersPlain(args, InvokeOptions.Empty);
+    }
+    public static Output<GetFoldersResult> getFolders(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vantage:index/getFolders:getFolders", TypeShape.of(GetFoldersResult.class), args, Utilities.withVersion(options));
+    }
+    public static CompletableFuture<GetFoldersResult> getFoldersPlain(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vantage:index/getFolders:getFolders", TypeShape.of(GetFoldersResult.class), args, Utilities.withVersion(options));
+    }
+    public static Output<GetSegmentsResult> getSegments() {
+        return getSegments(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<GetSegmentsResult> getSegmentsPlain() {
+        return getSegmentsPlain(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static Output<GetSegmentsResult> getSegments(InvokeArgs args) {
+        return getSegments(args, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<GetSegmentsResult> getSegmentsPlain(InvokeArgs args) {
+        return getSegmentsPlain(args, InvokeOptions.Empty);
+    }
+    public static Output<GetSegmentsResult> getSegments(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vantage:index/getSegments:getSegments", TypeShape.of(GetSegmentsResult.class), args, Utilities.withVersion(options));
+    }
+    public static CompletableFuture<GetSegmentsResult> getSegmentsPlain(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vantage:index/getSegments:getSegments", TypeShape.of(GetSegmentsResult.class), args, Utilities.withVersion(options));
+    }
+    public static Output<GetTeamsResult> getTeams() {
+        return getTeams(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<GetTeamsResult> getTeamsPlain() {
+        return getTeamsPlain(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static Output<GetTeamsResult> getTeams(InvokeArgs args) {
+        return getTeams(args, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<GetTeamsResult> getTeamsPlain(InvokeArgs args) {
+        return getTeamsPlain(args, InvokeOptions.Empty);
+    }
+    public static Output<GetTeamsResult> getTeams(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vantage:index/getTeams:getTeams", TypeShape.of(GetTeamsResult.class), args, Utilities.withVersion(options));
+    }
+    public static CompletableFuture<GetTeamsResult> getTeamsPlain(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vantage:index/getTeams:getTeams", TypeShape.of(GetTeamsResult.class), args, Utilities.withVersion(options));
+    }
+    public static Output<GetUsersResult> getUsers() {
+        return getUsers(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<GetUsersResult> getUsersPlain() {
+        return getUsersPlain(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static Output<GetUsersResult> getUsers(InvokeArgs args) {
+        return getUsers(args, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<GetUsersResult> getUsersPlain(InvokeArgs args) {
+        return getUsersPlain(args, InvokeOptions.Empty);
+    }
+    public static Output<GetUsersResult> getUsers(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vantage:index/getUsers:getUsers", TypeShape.of(GetUsersResult.class), args, Utilities.withVersion(options));
+    }
+    public static CompletableFuture<GetUsersResult> getUsersPlain(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vantage:index/getUsers:getUsers", TypeShape.of(GetUsersResult.class), args, Utilities.withVersion(options));
+    }
+    public static Output<GetWorkspacesResult> getWorkspaces() {
+        return getWorkspaces(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<GetWorkspacesResult> getWorkspacesPlain() {
+        return getWorkspacesPlain(InvokeArgs.Empty, InvokeOptions.Empty);
+    }
+    public static Output<GetWorkspacesResult> getWorkspaces(InvokeArgs args) {
+        return getWorkspaces(args, InvokeOptions.Empty);
+    }
+    public static CompletableFuture<GetWorkspacesResult> getWorkspacesPlain(InvokeArgs args) {
+        return getWorkspacesPlain(args, InvokeOptions.Empty);
+    }
+    public static Output<GetWorkspacesResult> getWorkspaces(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invoke("vantage:index/getWorkspaces:getWorkspaces", TypeShape.of(GetWorkspacesResult.class), args, Utilities.withVersion(options));
+    }
+    public static CompletableFuture<GetWorkspacesResult> getWorkspacesPlain(InvokeArgs args, InvokeOptions options) {
+        return Deployment.getInstance().invokeAsync("vantage:index/getWorkspaces:getWorkspaces", TypeShape.of(GetWorkspacesResult.class), args, Utilities.withVersion(options));
     }
     public static Output<SavedFiltersResult> savedFilters() {
         return savedFilters(InvokeArgs.Empty, InvokeOptions.Empty);

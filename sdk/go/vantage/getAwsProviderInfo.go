@@ -19,12 +19,18 @@ func GetAwsProviderInfo(ctx *pulumi.Context, opts ...pulumi.InvokeOption) (*GetA
 
 // A collection of values returned by getAwsProviderInfo.
 type GetAwsProviderInfoResult struct {
+	// The policy that allows Vantage to list and describe resources from your AWS account.
 	AdditionalResourcesPolicy string `pulumi:"additionalResourcesPolicy"`
-	AutopilotPolicy           string `pulumi:"autopilotPolicy"`
-	CloudwatchMetricsPolicy   string `pulumi:"cloudwatchMetricsPolicy"`
-	ExternalId                string `pulumi:"externalId"`
-	IamRoleArn                string `pulumi:"iamRoleArn"`
+	// The policy that allows Vantage to manage autopilot.
+	AutopilotPolicy string `pulumi:"autopilotPolicy"`
+	// The policy that allows Vantage to retrieve cloudwatch metrics from your AWS account.
+	CloudwatchMetricsPolicy string `pulumi:"cloudwatchMetricsPolicy"`
+	// The Vantage external ID to authenticate your account.
+	ExternalId string `pulumi:"externalId"`
+	// The IAM role that Vantage assumes into your account.
+	IamRoleArn string `pulumi:"iamRoleArn"`
 	// The provider-assigned unique ID for this managed resource.
-	Id         string `pulumi:"id"`
+	Id string `pulumi:"id"`
+	// The policy that allows Vantage to manage autopilot.
 	RootPolicy string `pulumi:"rootPolicy"`
 }

@@ -5,20 +5,35 @@
     "renamedProperties": {},
     "renames": {
         "resources": {
+            "vantage:index/accessGrant:AccessGrant": "vantage_access_grant",
             "vantage:index/awsProvider:AwsProvider": "vantage_aws_provider",
             "vantage:index/costReport:CostReport": "vantage_cost_report",
             "vantage:index/dashboard:Dashboard": "vantage_dashboard",
             "vantage:index/folder:Folder": "vantage_folder",
-            "vantage:index/savedFilter:SavedFilter": "vantage_saved_filter"
+            "vantage:index/savedFilter:SavedFilter": "vantage_saved_filter",
+            "vantage:index/segment:Segment": "vantage_segment",
+            "vantage:index/team:Team": "vantage_team"
         },
         "functions": {
+            "vantage:index/getAccessGrants:getAccessGrants": "vantage_access_grants",
             "vantage:index/getAwsProviderInfo:getAwsProviderInfo": "vantage_aws_provider_info",
+            "vantage:index/getCostReports:getCostReports": "vantage_cost_reports",
+            "vantage:index/getDashboards:getDashboards": "vantage_dashboards",
+            "vantage:index/getFolders:getFolders": "vantage_folders",
+            "vantage:index/getSegments:getSegments": "vantage_segments",
+            "vantage:index/getTeams:getTeams": "vantage_teams",
+            "vantage:index/getUsers:getUsers": "vantage_users",
+            "vantage:index/getWorkspaces:getWorkspaces": "vantage_workspaces",
             "vantage:index/savedFilters:SavedFilters": "vantage_saved_filters"
         },
         "renamedProperties": {
             "vantage:index/SavedFiltersFilter:SavedFiltersFilter": {
                 "costReportTokens": "cost_report_tokens",
                 "workspaceToken": "workspace_token"
+            },
+            "vantage:index/accessGrant:AccessGrant": {
+                "resourceToken": "resource_token",
+                "teamToken": "team_token"
             },
             "vantage:index/awsProvider:AwsProvider": {
                 "bucketArn": "bucket_arn",
@@ -41,6 +56,13 @@
                 "parentFolderToken": "parent_folder_token",
                 "workspaceToken": "workspace_token"
             },
+            "vantage:index/getAccessGrants:getAccessGrants": {
+                "accessGrants": "access_grants"
+            },
+            "vantage:index/getAccessGrantsAccessGrant:getAccessGrantsAccessGrant": {
+                "resourceToken": "resource_token",
+                "teamToken": "team_token"
+            },
             "vantage:index/getAwsProviderInfo:getAwsProviderInfo": {
                 "additionalResourcesPolicy": "additional_resources_policy",
                 "autopilotPolicy": "autopilot_policy",
@@ -49,8 +71,44 @@
                 "iamRoleArn": "iam_role_arn",
                 "rootPolicy": "root_policy"
             },
+            "vantage:index/getCostReports:getCostReports": {
+                "costReports": "cost_reports"
+            },
+            "vantage:index/getCostReportsCostReport:getCostReportsCostReport": {
+                "folderToken": "folder_token",
+                "savedFilterTokens": "saved_filter_tokens",
+                "workspaceToken": "workspace_token"
+            },
+            "vantage:index/getDashboardsDashboard:getDashboardsDashboard": {
+                "dateBin": "date_bin",
+                "dateInterval": "date_interval",
+                "endDate": "end_date",
+                "startDate": "start_date",
+                "widgetTokens": "widget_tokens",
+                "workspaceToken": "workspace_token"
+            },
+            "vantage:index/getFoldersFolder:getFoldersFolder": {
+                "parentFolderToken": "parent_folder_token",
+                "savedFilterTokens": "saved_filter_tokens",
+                "workspaceToken": "workspace_token"
+            },
+            "vantage:index/getTeamsTeam:getTeamsTeam": {
+                "userEmails": "user_emails",
+                "userTokens": "user_tokens",
+                "workspaceTokens": "workspace_tokens"
+            },
             "vantage:index/savedFilter:SavedFilter": {
                 "workspaceToken": "workspace_token"
+            },
+            "vantage:index/segment:Segment": {
+                "parentSegmentToken": "parent_segment_token",
+                "trackUnallocated": "track_unallocated",
+                "workspaceToken": "workspace_token"
+            },
+            "vantage:index/team:Team": {
+                "userEmails": "user_emails",
+                "userTokens": "user_tokens",
+                "workspaceTokens": "workspace_tokens"
             },
             "vantage:index:Provider": {
                 "apiToken": "api_token"

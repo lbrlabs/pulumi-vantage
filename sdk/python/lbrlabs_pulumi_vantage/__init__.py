@@ -5,14 +5,25 @@
 from . import _utilities
 import typing
 # Export this package's modules as members:
+from .access_grant import *
 from .aws_provider import *
 from .cost_report import *
 from .dashboard import *
 from .folder import *
+from .get_access_grants import *
 from .get_aws_provider_info import *
+from .get_cost_reports import *
+from .get_dashboards import *
+from .get_folders import *
+from .get_segments import *
+from .get_teams import *
+from .get_users import *
+from .get_workspaces import *
 from .provider import *
 from .saved_filter import *
 from .saved_filters import *
+from .segment import *
+from .team import *
 from . import outputs
 
 # Make subpackages available:
@@ -25,6 +36,14 @@ else:
 _utilities.register(
     resource_modules="""
 [
+ {
+  "pkg": "vantage",
+  "mod": "index/accessGrant",
+  "fqn": "lbrlabs_pulumi_vantage",
+  "classes": {
+   "vantage:index/accessGrant:AccessGrant": "AccessGrant"
+  }
+ },
  {
   "pkg": "vantage",
   "mod": "index/awsProvider",
@@ -63,6 +82,22 @@ _utilities.register(
   "fqn": "lbrlabs_pulumi_vantage",
   "classes": {
    "vantage:index/savedFilter:SavedFilter": "SavedFilter"
+  }
+ },
+ {
+  "pkg": "vantage",
+  "mod": "index/segment",
+  "fqn": "lbrlabs_pulumi_vantage",
+  "classes": {
+   "vantage:index/segment:Segment": "Segment"
+  }
+ },
+ {
+  "pkg": "vantage",
+  "mod": "index/team",
+  "fqn": "lbrlabs_pulumi_vantage",
+  "classes": {
+   "vantage:index/team:Team": "Team"
   }
  }
 ]

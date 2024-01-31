@@ -46,26 +46,41 @@ class GetAwsProviderInfoResult:
     @property
     @pulumi.getter(name="additionalResourcesPolicy")
     def additional_resources_policy(self) -> str:
+        """
+        The policy that allows Vantage to list and describe resources from your AWS account.
+        """
         return pulumi.get(self, "additional_resources_policy")
 
     @property
     @pulumi.getter(name="autopilotPolicy")
     def autopilot_policy(self) -> str:
+        """
+        The policy that allows Vantage to manage autopilot.
+        """
         return pulumi.get(self, "autopilot_policy")
 
     @property
     @pulumi.getter(name="cloudwatchMetricsPolicy")
     def cloudwatch_metrics_policy(self) -> str:
+        """
+        The policy that allows Vantage to retrieve cloudwatch metrics from your AWS account.
+        """
         return pulumi.get(self, "cloudwatch_metrics_policy")
 
     @property
     @pulumi.getter(name="externalId")
     def external_id(self) -> str:
+        """
+        The Vantage external ID to authenticate your account.
+        """
         return pulumi.get(self, "external_id")
 
     @property
     @pulumi.getter(name="iamRoleArn")
     def iam_role_arn(self) -> str:
+        """
+        The IAM role that Vantage assumes into your account.
+        """
         return pulumi.get(self, "iam_role_arn")
 
     @property
@@ -79,6 +94,9 @@ class GetAwsProviderInfoResult:
     @property
     @pulumi.getter(name="rootPolicy")
     def root_policy(self) -> str:
+        """
+        The policy that allows Vantage to manage autopilot.
+        """
         return pulumi.get(self, "root_policy")
 
 

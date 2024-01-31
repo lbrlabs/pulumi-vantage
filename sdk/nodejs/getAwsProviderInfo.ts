@@ -15,14 +15,32 @@ export function getAwsProviderInfo(opts?: pulumi.InvokeOptions): Promise<GetAwsP
  * A collection of values returned by getAwsProviderInfo.
  */
 export interface GetAwsProviderInfoResult {
+    /**
+     * The policy that allows Vantage to list and describe resources from your AWS account.
+     */
     readonly additionalResourcesPolicy: string;
+    /**
+     * The policy that allows Vantage to manage autopilot.
+     */
     readonly autopilotPolicy: string;
+    /**
+     * The policy that allows Vantage to retrieve cloudwatch metrics from your AWS account.
+     */
     readonly cloudwatchMetricsPolicy: string;
+    /**
+     * The Vantage external ID to authenticate your account.
+     */
     readonly externalId: string;
+    /**
+     * The IAM role that Vantage assumes into your account.
+     */
     readonly iamRoleArn: string;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    /**
+     * The policy that allows Vantage to manage autopilot.
+     */
     readonly rootPolicy: string;
 }
